@@ -1,11 +1,10 @@
-import { projects } from "@/content/projects";
+import { projects, type Project } from "@/content/projects";
 import { ProjectRow } from "@/components/ui/ProjectRow";
 
-type Props = { limit?: number };
+type Props = { items?: Project[] };
 
-/** Daftar proyek; `limit` memotong ke n teratas (beranda). */
-export function ProjectList({ limit }: Props) {
-  const items = limit === undefined ? projects : projects.slice(0, limit);
+/** Daftar proyek; default semua proyek dalam urutan array. */
+export function ProjectList({ items = projects }: Props) {
   return (
     <ol>
       {items.map((project, i) => (

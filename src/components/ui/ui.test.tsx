@@ -1,7 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { ExperienceItem } from "./ExperienceItem";
 import { ArchitectureList } from "./ArchitectureList";
+import { FlowDiagram } from "./FlowDiagram";
+import { ImpactRow } from "./ImpactRow";
 import { LocalTime } from "./LocalTime";
 import { SystemDiagram } from "./SystemDiagram";
 import { PageHeader } from "./PageHeader";
@@ -153,5 +155,70 @@ describe("ArchitectureList", () => {
     const items = screen.getAllByRole("listitem");
     expect(items).toHaveLength(2);
     expect(screen.getByText("Fiber router, request filter")).toBeInTheDocument();
+  });
+});
+
+describe("ProjectRow CTA", () => {
+  it("satu tautan aksesibel bernama unik ke studi kasus; CTA visual tidak digandakan untuk AT", () => {
+    render(
+      <ol>
+        <ProjectRow
+          index={0}
+          project={{
+            slug: "z",
+            title: "Zed",
+            year: "2025",
+            context: "Open source",
+            summary: "S",
+            stack: ["Go"],
+            repo: "https://github.com/x/z",
+            caseStudy: { problem: "P", built: "B", architecture: [], decisions: [], evidence: [] },
+          }}
+        />
+      </ol>,
+    );
+    const study = screen.getAllByRole("link", { name: "Case study: Zed" });
+    expect(study).toHaveLength(1);
+    expect(study[0]).toHaveAttribute("href", "/projects/z");
+    expect(screen.getByText(/case study/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Source of Zed" })).toBeInTheDocument();
+  });
+});
+
+describe("FlowDiagram", () => {
+  const flow = {
+    nodes: [
+      { id: "a", label: "Input", note: "prompt" },
+      { id: "b", label: "Generator" },
+      { id: "c", label: "Repo" },
+    ],
+    edges: [
+      { from: "a", to: "b", label: "answers" },
+      { from: "b", to: "c" },
+    ],
+  };
+  it("merender figure, caption, node, dan daftar alur aksesibel", () => {
+    render(<FlowDiagram flow={flow} caption="How it works" />);
+    const fig = screen.getByRole("figure", { name: /how it works/i });
+    expect(fig).toBeInTheDocument();
+    const list = screen.getByRole("list", { name: /flow/i });
+    expect(within(list).getAllByRole("listitem")).toHaveLength(2);
+    expect(within(list).getByText(/Input → Generator \(answers\)/)).toBeInTheDocument();
+    expect(screen.getAllByText("Generator").length).toBeGreaterThan(0);
+  });
+  it("tidak merender apa pun tanpa flow", () => {
+    const { container } = render(<FlowDiagram flow={undefined} caption="x" />);
+    expect(container).toBeEmptyDOMElement();
+  });
+});
+
+describe("ImpactRow", () => {
+  it("merender angka bila ada dan tidak merender bila kosong", () => {
+    const { container, unmount } = render(<ImpactRow impact={[]} />);
+    expect(container).toBeEmptyDOMElement();
+    unmount();
+    render(<ImpactRow impact={[{ value: "3", label: "services" }]} />);
+    expect(screen.getByText("3")).toBeInTheDocument();
+    expect(screen.getByText("services")).toBeInTheDocument();
   });
 });

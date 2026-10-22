@@ -41,9 +41,9 @@ export const site = {
     headline: ["Systems that stay up", "when traffic doesn't."],
     mutedLine: 1,
     intro:
-      "I design and run backend services in Go: APIs, queues, caches and the observability to know what they are doing. Three years across banking, logistics and consumer products.",
+      "I build and run backend services in Go: gRPC and REST APIs with RabbitMQ at BRI, Redis caching and reliability work at Lion Parcel, payment-gateway integrations with OpenTelemetry tracing at Icon Plus. Three years across banking, logistics and consumer products.",
     diagramDescription:
-      "Illustrative request path: an edge enters a Go API that talks to PostgreSQL, Redis and a RabbitMQ queue, with OpenTelemetry tracing alongside.",
+      "Illustrative request path: an edge enters a Go API that talks to PostgreSQL, Redis and a RabbitMQ queue, with OpenTelemetry tracing alongside. Where each ran in production: Go services at BRI, Lion Parcel and Icon Plus; PostgreSQL at Icon Plus; Redis caching and locks at Lion Parcel; RabbitMQ at BRI; OpenTelemetry at Icon Plus.",
     primary: { label: "Get in touch", href: "/contact" },
     secondary: { label: "See projects", href: "/projects" },
   },

@@ -1,16 +1,17 @@
 # Progress — andreanpradana.com
 
-Diperbarui: 2026-10-22 · Total: 57/57 task (100%)
+Diperbarui: 2026-10-23 · Total: 63/63 task (100%)
 
-| Prioritas | Fitur              | Progress   | %   | x/y | Status      |
-| --------- | ------------------ | ---------- | --- | --- | ----------- |
-| P0        | Fondasi            | ░░░░░░░░░░ | 0%  | 0/6 | Belum mulai |
-| P0        | Hero & Nav         | ░░░░░░░░░░ | 0%  | 0/4 | Belum mulai |
-| P0        | Selected Work      | ░░░░░░░░░░ | 0%  | 0/4 | Belum mulai |
-| P1        | About & Experience | ░░░░░░░░░░ | 0%  | 0/3 | Belum mulai |
-| P1        | Contact & Footer   | ░░░░░░░░░░ | 0%  | 0/3 | Belum mulai |
-| P1        | SEO & Metadata     | ░░░░░░░░░░ | 0%  | 0/4 | Belum mulai |
-| P2        | Deploy             | ░░░░░░░░░░ | 0%  | 0/2 | Belum mulai |
+| Prioritas | Fitur              | Progress   | %    | x/y | Status      |
+| --------- | ------------------ | ---------- | ---- | --- | ----------- |
+| P0        | Fondasi            | ░░░░░░░░░░ | 0%   | 0/6 | Belum mulai |
+| P0        | Hero & Nav         | ░░░░░░░░░░ | 0%   | 0/4 | Belum mulai |
+| P0        | Selected Work      | ░░░░░░░░░░ | 0%   | 0/4 | Belum mulai |
+| P1        | About & Experience | ░░░░░░░░░░ | 0%   | 0/3 | Belum mulai |
+| P1        | Contact & Footer   | ░░░░░░░░░░ | 0%   | 0/3 | Belum mulai |
+| P1        | SEO & Metadata     | ░░░░░░░░░░ | 0%   | 0/4 | Belum mulai |
+| P2        | Deploy             | ░░░░░░░░░░ | 0%   | 0/2 | Belum mulai |
+| P0        | Proof v2           | ██████████ | 100% | 6/6 | Selesai     |
 
 Legenda: █ selesai · ░ belum · Status: Belum mulai / Berjalan / Selesai / Terblokir
 
@@ -108,3 +109,12 @@ Legenda: █ selesai · ░ belum · Status: Belum mulai / Berjalan / Selesai / 
 - [x] svcgen di urutan pertama dengan dampak faktual
 - [x] Footer memuat email, GitHub, LinkedIn
 - [x] Diagram: deskripsi sr-only, label "illustrative", tanpa angka latensi
+
+## Proof v2 (P0)
+
+- [x] `Experience.highlight` (angka kata demi kata dari `summary`) tampil di strip beranda
+- [x] Hero intro menyebut bukti per kemampuan; anotasi node `SystemDiagram` (sembunyi < 640px, ada di deskripsi sr-only)
+- [x] `Project.featured` + `featuredProjects()`: svcgen → System Design Practice → Trendstore; `/projects` urutan array
+- [x] CTA "Case study →" per baris, satu tautan beraksesibel `Case study: <judul>` (stretched link)
+- [x] `ui/FlowDiagram` dari `caseStudy.flow` (svcgen, System Design Practice); `ui/ImpactRow` hanya bila `impact` terisi (saat ini kosong)
+- [x] 46 test, coverage 98%; review + ui-check 375/768/1280 terang-gelap

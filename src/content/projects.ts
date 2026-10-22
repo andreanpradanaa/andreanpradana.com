@@ -1,5 +1,9 @@
 export type ArchitectureItem = { name: string; role: string };
 export type Decision = { title: string; body: string };
+export type FlowNode = { id: string; label: string; note?: string };
+export type FlowEdge = { from: string; to: string; label?: string };
+export type Flow = { nodes: FlowNode[]; edges: FlowEdge[] };
+export type Impact = { value: string; label: string };
 export type CaseStudy = {
   /** Masalah yang dipecahkan. */
   problem: string;
@@ -11,6 +15,10 @@ export type CaseStudy = {
   /** Bukti yang bisa dicek di repo (bukan klaim angka). */
   evidence: string[];
   status?: string;
+  /** Diagram alur dari data; tanpa `flow` tidak ada diagram. */
+  flow?: Flow;
+  /** Angka dampak terukur; hanya dari data user, kosong = tidak dirender. */
+  impact?: Impact[];
 };
 export type Project = {
   slug: string;
@@ -22,6 +30,8 @@ export type Project = {
   stack: string[];
   repo?: string;
   live?: string;
+  /** Urutan tampil di beranda (1 = pertama); tanpa nilai = tidak ditampilkan di beranda. */
+  featured?: number;
   caseStudy: CaseStudy;
 };
 
@@ -39,6 +49,7 @@ export const projects: Project[] = [
       "A CLI that scaffolds a production-shaped Go service in one command and keeps extending it: fx wiring, Fiber router, optional Postgres, Redis and partner clients, Dockerfile, GitLab CI and Sonar config. Used at Icon Plus to start new integrator services.",
     stack: ["Go", "Fiber", "fx", "GitLab CI"],
     repo: "https://github.com/andreanpradanaa/go-service-generator",
+    featured: 1,
     caseStudy: {
       problem:
         "Every new integrator service at work started as a copy of the last one. Folder layout drifted, CI files diverged, and the first day of a new service went to boilerplate instead of the integration itself.",
@@ -90,6 +101,23 @@ export const projects: Project[] = [
         "Used at Icon Plus for new integrator services; the README documents the private module path the generated code depends on.",
       ],
       status: "Actively used and extended",
+      flow: {
+        nodes: [
+          { id: "input", label: "Prompts", note: "or piped answers" },
+          { id: "templates", label: "Embedded templates", note: "text/template" },
+          { id: "generate", label: "Generate + gofmt" },
+          { id: "repo", label: "Service repo", note: "fx modules · Fiber · config" },
+          { id: "add", label: "svcgen add", note: "feature | external" },
+          { id: "anchor", label: "Insert via anchors", note: "fx.Provide(" },
+        ],
+        edges: [
+          { from: "input", to: "generate" },
+          { from: "templates", to: "generate" },
+          { from: "generate", to: "repo", label: "svcgen new" },
+          { from: "add", to: "anchor" },
+          { from: "anchor", to: "repo", label: "same repo" },
+        ],
+      },
     },
   },
   {
@@ -101,6 +129,7 @@ export const projects: Project[] = [
       "E-commerce backend in Go with a layered domain / application / infrastructure structure, SQL migrations, repository interfaces with generated mocks, and a documented REST API for products, categories, cart, checkout and admin.",
     stack: ["Go", "PostgreSQL", "golang-migrate"],
     repo: "https://github.com/andreanpradanaa/trendstore",
+    featured: 3,
     caseStudy: {
       problem:
         "A practice ground for the layering questions that come up in every backend codebase: where business rules live, how handlers stay thin, and how to keep the database replaceable in tests.",
@@ -202,6 +231,7 @@ export const projects: Project[] = [
       "A Go + HTMX app for interview practice: a question bank with answer frameworks, flashcards and quizzes, a progress tracker and timed mock interviews with self-rating. Server-rendered, no JS build step.",
     stack: ["Go", "chi", "PostgreSQL", "Redis", "HTMX"],
     repo: "https://github.com/andreanpradanaa/system-design-practice",
+    featured: 2,
     caseStudy: {
       problem:
         "Reading theory does not stick; practising with a timer and a rubric does. I wanted a personal tool for that without paying for a course.",
@@ -236,10 +266,36 @@ export const projects: Project[] = [
         "README describes the 6-step answer structure and the rubric used in mock mode.",
       ],
       status: "Working; content grows via YAML",
+      flow: {
+        nodes: [
+          { id: "browser", label: "Browser", note: "HTMX partials" },
+          { id: "router", label: "chi router" },
+          { id: "handlers", label: "Handlers + templates" },
+          { id: "store", label: "Store" },
+          { id: "pg", label: "PostgreSQL", note: "embedded migrations" },
+          { id: "redis", label: "Redis", note: "curriculum cache" },
+          { id: "seed", label: "Seed YAML", note: "on startup" },
+        ],
+        edges: [
+          { from: "browser", to: "router" },
+          { from: "router", to: "handlers" },
+          { from: "handlers", to: "store" },
+          { from: "store", to: "pg" },
+          { from: "store", to: "redis", label: "list cache" },
+          { from: "seed", to: "pg", label: "load" },
+        ],
+      },
     },
   },
 ];
 
 export function findProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
+}
+
+/** Proyek unggulan beranda, diurutkan lewat `featured`; `/projects` memakai urutan array. */
+export function featuredProjects(): Project[] {
+  return projects
+    .filter((p): p is Project & { featured: number } => typeof p.featured === "number")
+    .sort((a, b) => a.featured - b.featured);
 }

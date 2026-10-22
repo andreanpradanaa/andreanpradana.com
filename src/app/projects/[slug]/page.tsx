@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { findProject, projects } from "@/content/projects";
 import { pageMetadata } from "@/lib/metadata";
 import { ArchitectureList } from "@/components/ui/ArchitectureList";
+import { FlowDiagram } from "@/components/ui/FlowDiagram";
+import { ImpactRow } from "@/components/ui/ImpactRow";
 import { Container } from "@/components/ui/Container";
 import { TextLink } from "@/components/ui/TextLink";
 import { riseDelay } from "@/lib/utils";
@@ -79,7 +81,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
 
         <section className="rise mt-14" style={riseDelay(280)}>
           <h2 className={H2}>Architecture</h2>
-          <div className="mt-4">
+          <div className="mt-4 space-y-4">
+            <FlowDiagram
+              flow={cs.flow}
+              caption={`${project.title}: how the pieces connect (illustrative)`}
+            />
             <ArchitectureList items={cs.architecture} />
           </div>
         </section>
@@ -100,6 +106,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
             ))}
           </ol>
         </section>
+
+        <ImpactRow impact={cs.impact} />
 
         <section className="rise mt-14" style={riseDelay(360)}>
           <h2 className={H2}>Evidence</h2>

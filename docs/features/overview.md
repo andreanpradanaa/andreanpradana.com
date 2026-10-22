@@ -26,21 +26,25 @@ Situs personal branding Andrean Pradana, Backend Engineer (Go, sistem pembayaran
 
 ## Section → komponen → data
 
-| Section            | Komponen                               | Data                                                |
-| ------------------ | -------------------------------------- | --------------------------------------------------- |
-| Nav                | `components/sections/Nav`              | `content/site.ts` (nav, nama)                       |
-| Hero               | `sections/Hero`                        | `content/site.ts` (headline, intro, lokasi, status) |
-| Selected Work      | `sections/Work` + `ui/ProjectRow`      | `content/projects.ts`                               |
-| About & Experience | `sections/About` + `ui/ExperienceItem` | `content/site.ts`, `content/experience.ts`          |
-| Contact            | `sections/Contact`                     | `content/site.ts` (email, sosial)                   |
-| Footer             | `sections/Footer`                      | `content/site.ts`                                   |
+| Section            | Komponen                                                 | Data                                                          |
+| ------------------ | -------------------------------------------------------- | ------------------------------------------------------------- |
+| Nav                | `components/sections/Nav`                                | `content/site.ts` (nav, nama)                                 |
+| Hero               | `sections/Hero`                                          | `content/site.ts` (headline, intro, lokasi, status)           |
+| Selected Work      | `sections/FeaturedWork` + `ui/ProjectRow`                | `content/projects.ts` (`featuredProjects()`, urut `featured`) |
+| Experience strip   | `sections/ExperienceStrip`                               | `content/experience.ts` (`highlight`)                         |
+| Studi kasus        | `app/projects/[slug]` + `ui/FlowDiagram`, `ui/ImpactRow` | `content/projects.ts` (`caseStudy.flow`, `caseStudy.impact`)  |
+| About & Experience | `sections/About` + `ui/ExperienceItem`                   | `content/site.ts`, `content/experience.ts`                    |
+| Contact            | `sections/Contact`                                       | `content/site.ts` (email, sosial)                             |
+| Footer             | `sections/Footer`                                        | `content/site.ts`                                             |
 
 ## Inventaris komponen UI
 
 - `ui/Container` — lebar maks + padding horizontal responsif.
 - `ui/SectionLabel` — label mono bernomor + hairline (`01 — Work`).
 - `ui/TextLink` — tautan dengan underline tipis yang menebal saat hover; varian eksternal menampilkan `↗`; prop `tap` memperbesar area sentuh ke ≥ 44px (`inline-block py-3.5 -my-3.5`) untuk tautan berdiri sendiri, jangan dipakai di dalam paragraf.
-- `ui/ProjectRow` — baris proyek: nomor + konteks (`context`: Open source / Used at work / Study project), judul, tahun, deskripsi, stack, tautan Source/Live dengan `aria-label` unik per proyek.
+- `ui/ProjectRow` — baris proyek: konteks (`context`: Open source / Used at work / Study project), judul, tahun, deskripsi, stack. Judul = satu-satunya tautan studi kasus (nama `Case study: <judul>`), diperluas ke seluruh baris (stretched link); teks "Case study →" hanya visual; Source/Live `relative z-10` dengan `aria-label` unik.
+- `ui/FlowDiagram` — diagram alur dari data (`Flow { nodes, edges }`), layout level topologis; dua SVG `aria-hidden` (horizontal ≥ 768px, vertikal di bawahnya), `<figure aria-labelledby>` + `<figcaption>` + daftar sr-only "A → B (label)". Tanpa `flow` tidak merender.
+- `ui/ImpactRow` — `dl` angka dampak; hanya dirender bila `impact` terisi (saat ini kosong untuk semua proyek; angka tidak boleh dikarang).
 - `ui/ExperienceItem` — peran, organisasi, periode, ringkasan.
 
 ## Design token (di `src/app/globals.css`, `@theme`)
@@ -57,6 +61,8 @@ Situs personal branding Andrean Pradana, Backend Engineer (Go, sistem pembayaran
 | Font mono        | Geist Mono                                  |           |
 | Skala tipe       | 14 / 16 / 18 / 24 / 32 / 48 / 64–80 (clamp) |           |
 | Spacing section  | `py-24` mobile → `py-32` desktop            |           |
+
+Proof v2 (2026-10-23): tidak ada token baru; anotasi `SystemDiagram` dan `FlowDiagram` memakai `fill-ink`, `fill-muted`, `fill-surface`, `stroke-line`, `bg-paper-2/40`.
 
 ## State
 

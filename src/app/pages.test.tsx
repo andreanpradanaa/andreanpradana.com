@@ -86,3 +86,33 @@ describe("ContactPage", () => {
     vi.useRealTimers();
   });
 });
+
+describe("CaseStudyPage", () => {
+  const params = (slug: string) => ({ params: Promise.resolve({ slug }) });
+
+  it("menghasilkan satu param per proyek dan metadata berjudul proyek", async () => {
+    expect(generateStaticParams()).toEqual(projects.map((p) => ({ slug: p.slug })));
+    const meta = await generateMetadata(params("svcgen"));
+    expect(meta.title).toContain("svcgen");
+    expect(await generateMetadata(params("nope"))).toEqual({});
+  });
+
+  it("svcgen punya diagram alur beraksesibel dan tanpa bagian Impact (data kosong)", async () => {
+    render(await CaseStudyPage(params("svcgen")));
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("svcgen");
+    const figure = screen.getByRole("figure");
+    expect(figure).toHaveAccessibleName(/how the pieces connect/i);
+    expect(within(figure).getByRole("list", { name: /flow/i })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { level: 2, name: /impact/i })).toBeNull();
+  });
+
+  it("trendstore tanpa flow tidak merender figure", async () => {
+    expect(findProject("trendstore")?.caseStudy.flow).toBeUndefined();
+    render(await CaseStudyPage(params("trendstore")));
+    expect(screen.queryByRole("figure")).toBeNull();
+  });
+
+  it("slug tak dikenal memanggil notFound", async () => {
+    await expect(CaseStudyPage(params("nope"))).rejects.toThrow("NEXT_NOT_FOUND");
+  });
+});

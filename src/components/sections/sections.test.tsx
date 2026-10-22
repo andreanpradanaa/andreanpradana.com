@@ -1,10 +1,11 @@
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { experience } from "@/content/experience";
-import { projects } from "@/content/projects";
+import { featuredProjects, projects } from "@/content/projects";
 import { site } from "@/content/site";
 import { About } from "./About";
 import { Contact } from "./Contact";
+import { ExperienceStrip } from "./ExperienceStrip";
 import { Footer } from "./Footer";
 import { ProjectList } from "./ProjectList";
 
@@ -24,15 +25,15 @@ describe("ProjectList", () => {
   it("judul proyek menautkan ke halaman studi kasus", () => {
     render(<ProjectList />);
     for (const p of projects) {
-      expect(screen.getByRole("link", { name: p.title })).toHaveAttribute(
+      expect(screen.getByRole("link", { name: `Case study: ${p.title}` })).toHaveAttribute(
         "href",
         `/projects/${p.slug}`,
       );
     }
   });
 
-  it("prop limit membatasi jumlah baris", () => {
-    render(<ProjectList limit={2} />);
+  it("prop items membatasi baris yang dirender", () => {
+    render(<ProjectList items={projects.slice(0, 2)} />);
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
   });
 });
@@ -78,5 +79,58 @@ describe("Footer", () => {
       expect(screen.getByRole("link", { name: s.label })).toHaveAttribute("href", s.href);
     }
     expect(screen.getByRole("link", { name: /source/i })).toHaveAttribute("href", site.sourceUrl);
+  });
+});
+
+describe("ExperienceStrip", () => {
+  it("menampilkan highlight tiga pekerjaan teratas, kata demi kata dari data", () => {
+    render(<ExperienceStrip />);
+    for (const e of experience.slice(0, 3)) {
+      expect(screen.getByText(e.org)).toBeInTheDocument();
+      if (e.highlight) expect(screen.getByText(e.highlight)).toBeInTheDocument();
+    }
+    expect(screen.getByText(/42%/)).toBeInTheDocument();
+    expect(screen.getByText(/zero to above 80%/)).toBeInTheDocument();
+    expect(screen.getByText(/OpenTelemetry/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /full story/i })).toHaveAttribute("href", "/about");
+  });
+
+  it("entri tanpa highlight tetap tampil tanpa baris highlight", () => {
+    render(
+      <ExperienceStrip
+        items={[{ role: "Dev", org: "Acme", start: "2020", end: "2021", summary: "S" }]}
+      />,
+    );
+    expect(screen.getByText("Acme")).toBeInTheDocument();
+    expect(screen.queryByTestId("experience-highlight")).toBeNull();
+  });
+});
+
+describe("featuredProjects", () => {
+  it("mengurutkan beranda lewat field featured tanpa mengubah urutan /projects", () => {
+    expect(featuredProjects().map((p) => p.slug)).toEqual([
+      "svcgen",
+      "system-design-practice",
+      "trendstore",
+    ]);
+    expect(projects.map((p) => p.slug)).toContain("sysdesign-lab");
+    render(<ProjectList items={featuredProjects()} />);
+    const titles = screen.getAllByRole("heading", { level: 3 }).map((h) => h.textContent);
+    expect(titles).toEqual(["svcgen", "System Design Practice", "Trendstore API"]);
+  });
+});
+
+describe("data flow studi kasus", () => {
+  it("setiap edge merujuk node yang ada dan id node unik", () => {
+    for (const p of projects) {
+      const flow = p.caseStudy.flow;
+      if (!flow) continue;
+      const ids = flow.nodes.map((n) => n.id);
+      expect(new Set(ids).size).toBe(ids.length);
+      for (const e of flow.edges) {
+        expect(ids).toContain(e.from);
+        expect(ids).toContain(e.to);
+      }
+    }
   });
 });
