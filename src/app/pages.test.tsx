@@ -1,15 +1,21 @@
 import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { experience } from "@/content/experience";
-import { projects } from "@/content/projects";
+import { findProject, projects } from "@/content/projects";
 import { site } from "@/content/site";
 import AboutPage from "./about/page";
 import ContactPage from "./contact/page";
 import HomePage from "./page";
 import ProjectsPage from "./projects/page";
 import WorkRedirect from "./work/page";
+import CaseStudyPage, { generateMetadata, generateStaticParams } from "./projects/[slug]/page";
 
-vi.mock("next/navigation", () => ({ usePathname: () => "/" }));
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/",
+  notFound: () => {
+    throw new Error("NEXT_NOT_FOUND");
+  },
+}));
 
 describe("HomePage", () => {
   it("memuat hero dengan diagram dekoratif, tiga proyek unggulan, dan CTA", () => {

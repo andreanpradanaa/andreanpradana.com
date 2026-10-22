@@ -21,6 +21,16 @@ describe("ProjectList", () => {
     }
   });
 
+  it("judul proyek menautkan ke halaman studi kasus", () => {
+    render(<ProjectList />);
+    for (const p of projects) {
+      expect(screen.getByRole("link", { name: p.title })).toHaveAttribute(
+        "href",
+        `/projects/${p.slug}`,
+      );
+    }
+  });
+
   it("prop limit membatasi jumlah baris", () => {
     render(<ProjectList limit={2} />);
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
@@ -57,9 +67,16 @@ describe("Contact", () => {
 });
 
 describe("Footer", () => {
-  it("menampilkan tahun berjalan dan tautan sumber", () => {
+  it("menampilkan tahun berjalan, email, tautan sosial, dan sumber", () => {
     render(<Footer />);
     expect(screen.getByText(new RegExp(`© ${new Date().getFullYear()}`))).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: site.email })).toHaveAttribute(
+      "href",
+      `mailto:${site.email}`,
+    );
+    for (const s of site.social) {
+      expect(screen.getByRole("link", { name: s.label })).toHaveAttribute("href", s.href);
+    }
     expect(screen.getByRole("link", { name: /source/i })).toHaveAttribute("href", site.sourceUrl);
   });
 });

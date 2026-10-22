@@ -1,6 +1,6 @@
 # Progress — andreanpradana.com
 
-Diperbarui: 2026-10-22 · Total: 51/51 task (100%)
+Diperbarui: 2026-10-22 · Total: 57/57 task (100%)
 
 | Prioritas | Fitur              | Progress   | %   | x/y | Status      |
 | --------- | ------------------ | ---------- | --- | --- | ----------- |
@@ -99,3 +99,12 @@ Legenda: █ selesai · ░ belum · Status: Belum mulai / Berjalan / Selesai / 
 - [x] Rute `/projects` baru; `/work` → pengalihan (meta refresh + Nginx 301)
 - [x] Token `--surface` terang/gelap; palet situs dipertahankan
 - [x] Test diperbarui (33), review diterapkan
+
+## Proof (P0)
+
+- [x] Audit repo: 3 repo kosong dikeluarkan; 4 proyek nyata dengan `caseStudy`
+- [x] Halaman studi kasus `/projects/<slug>` (`ArchitectureList`, keputusan/trade-off, evidence)
+- [x] Strip pengalaman di beranda (Download CV dibatalkan: CV memuat nomor telepon)
+- [x] svcgen di urutan pertama dengan dampak faktual
+- [x] Footer memuat email, GitHub, LinkedIn
+- [x] Diagram: deskripsi sr-only, label "illustrative", tanpa angka latensi

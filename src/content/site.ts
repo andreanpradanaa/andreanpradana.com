@@ -42,6 +42,8 @@ export const site = {
     mutedLine: 1,
     intro:
       "I design and run backend services in Go: APIs, queues, caches and the observability to know what they are doing. Three years across banking, logistics and consumer products.",
+    diagramDescription:
+      "Illustrative request path: an edge enters a Go API that talks to PostgreSQL, Redis and a RabbitMQ queue, with OpenTelemetry tracing alongside.",
     primary: { label: "Get in touch", href: "/contact" },
     secondary: { label: "See projects", href: "/projects" },
   },

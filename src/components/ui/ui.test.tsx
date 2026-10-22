@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { ExperienceItem } from "./ExperienceItem";
+import { ArchitectureList } from "./ArchitectureList";
 import { LocalTime } from "./LocalTime";
 import { SystemDiagram } from "./SystemDiagram";
 import { PageHeader } from "./PageHeader";
@@ -56,6 +57,7 @@ describe("ProjectRow", () => {
             summary: "S",
             stack: ["Go", "Redis"],
             live: "https://x.dev",
+            caseStudy: { problem: "P", built: "B", architecture: [], decisions: [], evidence: [] },
           }}
         />
       </ol>,
@@ -82,6 +84,7 @@ describe("ProjectRow", () => {
             summary: "S",
             stack: ["Go"],
             repo: "https://github.com/x/y",
+            caseStudy: { problem: "P", built: "B", architecture: [], decisions: [], evidence: [] },
           }}
         />
       </ol>,
@@ -133,5 +136,22 @@ describe("SystemDiagram", () => {
     expect(svg).toHaveAttribute("aria-hidden", "true");
     expect(svg).toHaveTextContent(/api/i);
     expect(svg).toHaveTextContent(/postgres/i);
+    expect(svg).not.toHaveTextContent(/42ms/);
+  });
+});
+
+describe("ArchitectureList", () => {
+  it("merender komponen dan perannya sebagai daftar", () => {
+    render(
+      <ArchitectureList
+        items={[
+          { name: "API", role: "Fiber router, request filter" },
+          { name: "PostgreSQL", role: "primary store" },
+        ]}
+      />,
+    );
+    const items = screen.getAllByRole("listitem");
+    expect(items).toHaveLength(2);
+    expect(screen.getByText("Fiber router, request filter")).toBeInTheDocument();
   });
 });

@@ -1,4 +1,5 @@
 import type { Project } from "@/content/projects";
+import Link from "next/link";
 import { riseDelay } from "@/lib/utils";
 import { TextLink } from "./TextLink";
 
@@ -13,7 +14,9 @@ export function ProjectRow({ project, index }: Props) {
     >
       <div className="md:col-span-4">
         <h3 className="text-ink group-hover:text-accent text-lg font-medium tracking-tight transition-colors duration-200">
-          {project.title}
+          <Link href={`/projects/${project.slug}`} className="-my-2 inline-block py-2">
+            {project.title}
+          </Link>
         </h3>
         <p className="text-label text-muted mt-1 font-mono">
           {project.context} · {project.year}

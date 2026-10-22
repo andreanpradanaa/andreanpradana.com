@@ -51,7 +51,7 @@ export function SystemDiagram({ className }: Props) {
           api · go
         </text>
         <text className={SUB} x="220" y="224" textAnchor="middle">
-          p99 42ms
+          stateless · n replicas
         </text>
         <rect className={NODE} x="400" y="92" width="100" height="56" rx="12" />
         <text className={LABEL} x="450" y="116" textAnchor="middle">
@@ -79,7 +79,7 @@ export function SystemDiagram({ className }: Props) {
           otel
         </text>
         <text className={SUB} x="20" y="40">
-          request path · live
+          request path · illustrative
         </text>
       </g>
     </svg>

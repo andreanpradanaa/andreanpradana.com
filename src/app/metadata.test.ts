@@ -5,12 +5,9 @@ import sitemap from "./sitemap";
 describe("sitemap & robots", () => {
   it("sitemap memuat halaman utama dengan base URL", () => {
     const entries = sitemap();
-    expect(entries.map((e) => e.url.replace(/^https?:\/\/[^/]+/, ""))).toEqual([
-      "/",
-      "/projects",
-      "/about",
-      "/contact",
-    ]);
+    const paths = entries.map((e) => e.url.replace(/^https?:\/\/[^/]+/, ""));
+    expect(paths.slice(0, 4)).toEqual(["/", "/projects", "/about", "/contact"]);
+    expect(paths).toContain("/projects/svcgen");
   });
   it("robots mengizinkan semua dan menunjuk sitemap", () => {
     const r = robots();

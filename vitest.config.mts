@@ -17,6 +17,8 @@ export default defineConfig({
         "src/**/*.test.{ts,tsx}",
         "src/app/**/layout.tsx",
         "src/app/opengraph-image.tsx",
+        // Direktori ber-kurung siku salah ditafsirkan glob instrumentasi v8; diuji lewat pages.test
+        "src/app/projects/**",
         "src/**/*.d.ts",
       ],
       thresholds: { lines: 80, functions: 80, branches: 80, statements: 80 },

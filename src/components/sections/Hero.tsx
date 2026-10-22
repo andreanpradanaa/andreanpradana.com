@@ -53,6 +53,7 @@ export function Hero() {
           </div>
           <div className="rise md:col-span-6" style={riseDelay(200)}>
             <SystemDiagram />
+            <p className="sr-only">{h.diagramDescription}</p>
           </div>
         </div>
       </Container>
