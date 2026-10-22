@@ -6,21 +6,7 @@ import { site } from "@/content/site";
 import { About } from "./About";
 import { Contact } from "./Contact";
 import { Footer } from "./Footer";
-import { Hero } from "./Hero";
 import { ProjectList } from "./ProjectList";
-
-describe("Hero", () => {
-  it("punya tepat satu h1 berisi headline dan tautan email", () => {
-    render(<Hero />);
-    const headings = screen.getAllByRole("heading", { level: 1 });
-    expect(headings).toHaveLength(1);
-    expect(headings[0]).toHaveTextContent(site.headline);
-    expect(screen.getByRole("link", { name: site.email })).toHaveAttribute(
-      "href",
-      `mailto:${site.email}`,
-    );
-  });
-});
 
 describe("ProjectList", () => {
   it("merender satu baris per proyek dengan tautan Source eksternal yang aman", () => {

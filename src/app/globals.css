@@ -8,6 +8,10 @@
   --muted: #6b655c;
   --line: #d9d3c7;
   --accent: #2f5d3a;
+  /* Hijau muda untuk latar pill hero maskot: teks tinta tetap kontras */
+  --accent-soft: #9fd3ac;
+  /* Tinggi header sticky; dipakai hero beranda agar pas satu layar */
+  --nav-h: 69px;
   color-scheme: light dark;
 }
 
@@ -19,6 +23,7 @@
     --muted: #9c948a;
     --line: #2d2923;
     --accent: #8fbf9a;
+    --accent-soft: #2f5d3a;
   }
 }
 
@@ -29,6 +34,7 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
 
   --font-display: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;

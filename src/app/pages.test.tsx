@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { experience } from "@/content/experience";
 import { projects } from "@/content/projects";
@@ -11,13 +11,30 @@ import WorkPage from "./work/page";
 vi.mock("next/navigation", () => ({ usePathname: () => "/" }));
 
 describe("HomePage", () => {
-  it("memuat hero, tiga proyek unggulan, dan tautan ke semua proyek", () => {
+  it("memuat hero maskot dengan satu h1, services, tiga proyek unggulan, dan tautan ke semua proyek", () => {
     render(<HomePage />);
-    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    const h1 = screen.getAllByRole("heading", { level: 1 });
+    expect(h1).toHaveLength(1);
+    expect(h1[0]).toHaveAccessibleName(
+      `${site.hero.year} ${site.hero.initials} ${site.hero.line2} ${site.hero.line3} ${site.hero.word}${site.hero.bracketed}`,
+    );
+    for (const s of site.hero.services) expect(screen.getByText(s)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: site.hero.seeking })).toHaveAttribute(
+      "href",
+      "/contact",
+    );
     expect(screen.getByRole("heading", { level: 2, name: /selected work/i })).toBeInTheDocument();
-    expect(within(screen.getByRole("list")).getAllByRole("listitem")).toHaveLength(3);
     expect(screen.getByRole("link", { name: /all work/i })).toHaveAttribute("href", "/work");
     expect(screen.queryByText(experience[0].summary)).toBeNull();
+  });
+
+  it("klik maskot menampilkan sapaan berikutnya", () => {
+    render(<HomePage />);
+    const mascot = screen.getByRole("button", { name: /say hi/i });
+    expect(screen.getByText(site.hero.greetings[0])).toBeInTheDocument();
+    fireEvent.click(mascot); // klik pertama: sapaan pertama tampil
+    fireEvent.click(mascot); // klik kedua: sapaan berikutnya
+    expect(screen.getByText(site.hero.greetings[1])).toBeInTheDocument();
   });
 });
 

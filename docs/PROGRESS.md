@@ -1,6 +1,6 @@
 # Progress — andreanpradana.com
 
-Diperbarui: 2026-10-22 · Total: 37/37 task (100%)
+Diperbarui: 2026-10-22 · Total: 41/41 task (100%)
 
 | Prioritas | Fitur              | Progress   | %   | x/y | Status      |
 | --------- | ------------------ | ---------- | --- | --- | ----------- |
@@ -76,3 +76,10 @@ Legenda: █ selesai · ░ belum · Status: Belum mulai / Berjalan / Selesai / 
 - [x] Nav sticky di layout, tautan aktif (`NavLinks`, `aria-current`), `next/link`
 - [x] Skip link ke `main`, struktur heading h1 → h2 di tiap rute
 - [x] Sitemap 4 rute
+
+## Mascot hero (P1)
+
+- [x] Komponen vendor `ui/mascot-portfolio-hero` + wrapper `sections/MascotHero` dengan konten `site.hero`
+- [x] Font Archivo Black, token `--accent-soft` dan `--nav-h`
+- [x] Perbaikan review: kontras mode gelap, `role="list"`, lint React Compiler
+- [x] Test perilaku beranda (h1, services, klik maskot) dan mock jsdom

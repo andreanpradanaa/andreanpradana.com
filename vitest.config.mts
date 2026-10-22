@@ -17,6 +17,8 @@ export default defineConfig({
         "src/**/*.test.{ts,tsx}",
         "src/app/**/layout.tsx",
         "src/app/opengraph-image.tsx",
+        // Komponen vendor 21st.dev: loop animasi RAF, diuji lewat perilaku halaman
+        "src/components/ui/mascot-portfolio-hero.tsx",
         "src/**/*.d.ts",
       ],
       thresholds: { lines: 80, functions: 80, branches: 80, statements: 80 },

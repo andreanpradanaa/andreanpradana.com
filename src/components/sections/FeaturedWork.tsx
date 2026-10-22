@@ -8,7 +8,7 @@ const FEATURED_COUNT = 3;
 /** Beranda: tiga proyek teratas + tautan ke halaman Work. */
 export function FeaturedWork() {
   return (
-    <section aria-labelledby="featured-heading" className="pb-8">
+    <section aria-labelledby="featured-heading" className="pt-16 pb-8 sm:pt-20">
       <Container>
         <SectionLabel number="01" id="featured-heading">
           Selected work

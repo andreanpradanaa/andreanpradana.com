@@ -1,10 +1,10 @@
 import { FeaturedWork } from "@/components/sections/FeaturedWork";
-import { Hero } from "@/components/sections/Hero";
+import { MascotHero } from "@/components/sections/MascotHero";
 
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <MascotHero />
       <FeaturedWork />
     </>
   );
