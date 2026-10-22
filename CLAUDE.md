@@ -4,7 +4,7 @@ Situs personal branding Andrean Pradana (Backend Engineer, Go). Statis, satu hal
 
 ## Stack
 
-Next.js 16.4 (App Router, Turbopack, `cacheComponents`) · React 19.3 · TypeScript 5.9 · Tailwind CSS 4 (token di `src/app/globals.css`) · pnpm 12 · Vitest 5 + Testing Library (jsdom) · ESLint 9 (`eslint-config-next`) + Prettier · deploy Vercel (domain andreanpradana.com).
+Next.js 16.4 (App Router, Turbopack, static export) · React 19.3 · TypeScript 5.9 · Tailwind CSS 4 (token di `src/app/globals.css`) · pnpm 12 · Vitest 5 + Testing Library (jsdom) · ESLint 9 (`eslint-config-next`) + Prettier · `output: "export"` → `out/` disajikan Nginx di VPS via rsync dari CI (lihat `deploy/README.md`), domain andreanpradana.com.
 
 ## Struktur
 
@@ -40,7 +40,7 @@ Jangan pernah `git commit` atau `git push` (dijaga hook). User commit manual per
 
 ## Perintah
 
-- `pnpm dev` dev server http://localhost:3000 · `pnpm build` build produksi · `pnpm start`
+- `pnpm dev` dev server http://localhost:3000 · `pnpm build` static export ke `out/` (`pnpm start` tidak dipakai)
 - `pnpm test` · `pnpm test:coverage` (ambang 80%) · `pnpm test:watch`
 - `pnpm typecheck` (jalankan `pnpm build` sekali dulu agar tipe global `LayoutProps` tersedia) · `pnpm lint` · `pnpm lint:fix`
 - `pnpm format` · `pnpm format:check`

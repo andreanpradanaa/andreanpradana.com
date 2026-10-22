@@ -33,6 +33,32 @@ jobs:
           path: coverage/
           retention-days: 7
 
-  # Deploy: TODO — gunakan integrasi Git Vercel (otomatis per push ke main) atau
-  # tambahkan job dengan `vercel deploy --prod` memakai secret VERCEL_TOKEN,
-  # VERCEL_ORG_ID, VERCEL_PROJECT_ID setelah proyek dibuat di Vercel.
+  deploy:
+    # Hanya push ke main, setelah semua pemeriksaan lulus. Lihat deploy/README.md.
+    needs: quality
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build static export
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://andreanpradana.com
+      - name: Siapkan kunci SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "${{ secrets.VPS_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+      - name: Rsync out/ ke VPS
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.VPS_PORT }}" \
+            out/ "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/andreanpradana.com/"
