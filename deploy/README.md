@@ -28,6 +28,8 @@ Tanggal: 2026-10-22 · Target: VPS 202.155.16.133 (Debian, Nginx 1.22, sudah mel
 
 5. Push ke `main` → job `deploy` di CI menjalankan rsync. Cek `https://andreanpradana.com`.
 
+Status 2026-10-22: kelima secret sudah terisi lewat `gh secret set` (private key di `~/.ssh/andreanpradana-deploy` di laptop), `setup-vps.sh` sudah dijalankan, situs live. Sertifikat berlaku sampai 2027-01-20, renewal otomatis via timer certbot. Bila `VPS_KNOWN_HOSTS` kosong, CI mengambil host key sendiri dengan `ssh-keyscan`. Catatan: SSH ke VPS diblok dari jaringan kantor; pakai jaringan lain.
+
 ## Deploy manual (tanpa CI)
 
 ```bash
