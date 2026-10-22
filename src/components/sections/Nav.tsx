@@ -1,29 +1,21 @@
+import Link from "next/link";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
+import { NavLinks } from "./NavLinks";
 
+/** Header sticky: latar kertas semi-transparan + blur, hairline di bawah. */
 export function Nav() {
   return (
-    <header>
+    <header className="bg-paper/90 border-line sticky top-0 z-40 border-b backdrop-blur">
       <Container>
-        <nav aria-label="Primary" className="flex items-baseline justify-between py-6 sm:py-8">
-          <a
-            href="#top"
+        <nav aria-label="Primary" className="flex items-baseline justify-between py-5">
+          <Link
+            href="/"
             className="font-display text-ink -my-2 inline-block py-2 text-lg tracking-tight"
           >
             {site.name}
-          </a>
-          <ul className="flex gap-5 sm:gap-8">
-            {site.nav.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="text-muted hover:text-ink text-label -my-3.5 inline-block py-3.5 font-mono tracking-wide uppercase transition-colors duration-200"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          </Link>
+          <NavLinks items={site.nav} />
         </nav>
       </Container>
     </header>

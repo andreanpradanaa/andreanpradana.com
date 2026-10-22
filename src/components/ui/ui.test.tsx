@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { ExperienceItem } from "./ExperienceItem";
+import { PageHeader } from "./PageHeader";
 import { ProjectRow } from "./ProjectRow";
 import { SectionLabel } from "./SectionLabel";
 import { TextLink } from "./TextLink";
@@ -103,5 +104,13 @@ describe("ExperienceItem", () => {
     expect(screen.getByText("2020–2021")).toBeInTheDocument();
     expect(screen.getByText(/Org/)).toBeInTheDocument();
     expect(screen.queryByRole("link")).toBeNull();
+  });
+});
+
+describe("PageHeader", () => {
+  it("merender label, h1, dan intro opsional", () => {
+    render(<PageHeader number="02" label="About" title="About" intro="Intro singkat" />);
+    expect(screen.getByRole("heading", { level: 1, name: "About" })).toBeInTheDocument();
+    expect(screen.getByText("Intro singkat")).toBeInTheDocument();
   });
 });

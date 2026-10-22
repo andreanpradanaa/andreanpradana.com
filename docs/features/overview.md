@@ -60,7 +60,7 @@ Situs personal branding Andrean Pradana, Backend Engineer (Go, sistem pembayaran
 
 ## State
 
-Situs statis: tidak ada loading/error runtime. State yang ada: hover/focus tautan, `prefers-color-scheme`, nav mobile (tanpa menu hamburger; nav cukup pendek untuk ditampilkan inline).
+Situs statis: tidak ada loading/error runtime. State yang ada: hover/focus tautan, tautan nav aktif per rute, `prefers-color-scheme`, nav mobile (tanpa menu hamburger; nav cukup pendek untuk ditampilkan inline).
 
 ## Responsif & aksesibilitas
 

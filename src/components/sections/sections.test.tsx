@@ -7,22 +7,7 @@ import { About } from "./About";
 import { Contact } from "./Contact";
 import { Footer } from "./Footer";
 import { Hero } from "./Hero";
-import { Nav } from "./Nav";
-import { Work } from "./Work";
-
-describe("Nav", () => {
-  it("menampilkan wordmark dan semua tautan navigasi", () => {
-    render(<Nav />);
-    const nav = screen.getByRole("navigation", { name: "Primary" });
-    expect(within(nav).getByText(site.name)).toHaveAttribute("href", "#top");
-    for (const item of site.nav) {
-      expect(within(nav).getByRole("link", { name: item.label })).toHaveAttribute(
-        "href",
-        item.href,
-      );
-    }
-  });
-});
+import { ProjectList } from "./ProjectList";
 
 describe("Hero", () => {
   it("punya tepat satu h1 berisi headline dan tautan email", () => {
@@ -37,9 +22,9 @@ describe("Hero", () => {
   });
 });
 
-describe("Work", () => {
+describe("ProjectList", () => {
   it("merender satu baris per proyek dengan tautan Source eksternal yang aman", () => {
-    render(<Work />);
+    render(<ProjectList />);
     const list = screen.getByRole("list");
     expect(within(list).getAllByRole("listitem")).toHaveLength(projects.length);
     const sources = screen.getAllByRole("link", { name: /^source of /i });
@@ -48,7 +33,11 @@ describe("Work", () => {
       expect(link).toHaveAttribute("target", "_blank");
       expect(link).toHaveAttribute("rel", "noopener noreferrer");
     }
-    expect(screen.getByRole("heading", { level: 2, name: /selected work/i })).toBeInTheDocument();
+  });
+
+  it("prop limit membatasi jumlah baris", () => {
+    render(<ProjectList limit={2} />);
+    expect(screen.getAllByRole("listitem")).toHaveLength(2);
   });
 });
 

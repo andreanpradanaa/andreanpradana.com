@@ -4,7 +4,7 @@ import { TextLink } from "@/components/ui/TextLink";
 
 export function Hero() {
   return (
-    <section id="top" className="pt-16 pb-24 sm:pt-24 sm:pb-32 lg:pt-32 lg:pb-40">
+    <section className="pt-16 pb-20 sm:pt-24 sm:pb-28 lg:pt-28 lg:pb-32">
       <Container>
         <p className="text-muted text-label font-mono tracking-wide uppercase">
           {site.name} · {site.role}

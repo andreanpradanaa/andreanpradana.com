@@ -1,6 +1,6 @@
 # Progress — andreanpradana.com
 
-Diperbarui: 2026-10-22 · Total: 32/32 task (100%)
+Diperbarui: 2026-10-22 · Total: 37/37 task (100%)
 
 | Prioritas | Fitur              | Progress   | %   | x/y | Status      |
 | --------- | ------------------ | ---------- | --- | --- | ----------- |
@@ -68,3 +68,11 @@ Legenda: █ selesai · ░ belum · Status: Belum mulai / Berjalan / Selesai / 
 - [x] Kolom konteks proyek (`context`) dan periode satu tahun
 - [x] Blok Track record di About (`highlights`)
 - [x] Blok Education dirapikan, label aside sebagai `h3`
+
+## Multi-page + sticky header (P1)
+
+- [x] Rute `/work`, `/about`, `/contact` dengan `PageHeader` (h1) dan metadata per halaman
+- [x] Beranda: Hero + 3 proyek unggulan + tautan "All work"
+- [x] Nav sticky di layout, tautan aktif (`NavLinks`, `aria-current`), `next/link`
+- [x] Skip link ke `main`, struktur heading h1 → h2 di tiap rute
+- [x] Sitemap 4 rute

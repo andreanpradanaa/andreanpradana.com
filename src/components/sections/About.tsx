@@ -2,30 +2,26 @@ import { experience } from "@/content/experience";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
 import { ExperienceItem } from "@/components/ui/ExperienceItem";
-import { SectionLabel } from "@/components/ui/SectionLabel";
 import { cn } from "@/lib/utils";
 
 function AsideLabel({ children, className }: { children: string; className?: string }) {
   return (
-    <h3
+    <h2
       className={cn(
         "text-label text-muted font-mono font-normal tracking-wide uppercase",
         className,
       )}
     >
       {children}
-    </h3>
+    </h2>
   );
 }
 
 export function About() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="scroll-mt-8 pt-24 sm:pt-32">
+    <section className="pb-8">
       <Container>
-        <SectionLabel number="02" id="about-heading">
-          About
-        </SectionLabel>
-        <div className="mt-10 grid gap-12 md:grid-cols-12">
+        <div className="grid gap-12 md:grid-cols-12">
           <div className="space-y-5 md:col-span-7">
             {site.about.map((p) => (
               <p key={p} className="text-ink/85 max-w-prose text-lg leading-relaxed">
@@ -69,7 +65,8 @@ export function About() {
             </div>
           </div>
         </div>
-        <ol className="mt-16">
+        <AsideLabel className="mt-16">Experience</AsideLabel>
+        <ol className="mt-3">
           {experience.map((item) => (
             <ExperienceItem key={`${item.org}-${item.start}`} item={item} />
           ))}

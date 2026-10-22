@@ -47,9 +47,9 @@ export const site = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/andreanpradanaa" },
   ],
   nav: [
-    { label: "Work", href: "#work" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Work", href: "/work" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
   sourceUrl: "https://github.com/andreanpradanaa/andreanpradana.com",
 } as const;
