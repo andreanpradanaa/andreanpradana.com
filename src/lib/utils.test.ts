@@ -12,4 +12,8 @@ describe("formatPeriod", () => {
     expect(formatPeriod("2023")).toBe("2023–now");
     expect(formatPeriod("2021", "2023")).toBe("2021–2023");
   });
+
+  it("menampilkan satu tahun bila awal dan akhir sama", () => {
+    expect(formatPeriod("2021", "2021")).toBe("2021");
+  });
 });

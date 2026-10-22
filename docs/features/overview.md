@@ -39,8 +39,8 @@ Situs personal branding Andrean Pradana, Backend Engineer (Go, sistem pembayaran
 
 - `ui/Container` — lebar maks + padding horizontal responsif.
 - `ui/SectionLabel` — label mono bernomor + hairline (`01 — Work`).
-- `ui/TextLink` — tautan dengan underline tipis yang menebal saat hover; varian eksternal menampilkan `↗`.
-- `ui/ProjectRow` — baris proyek: judul, tahun, deskripsi, stack, tautan repo/demo.
+- `ui/TextLink` — tautan dengan underline tipis yang menebal saat hover; varian eksternal menampilkan `↗`; prop `tap` memperbesar area sentuh ke ≥ 44px (`inline-block py-3.5 -my-3.5`) untuk tautan berdiri sendiri, jangan dipakai di dalam paragraf.
+- `ui/ProjectRow` — baris proyek: nomor + konteks (`context`: Open source / Used at work / Study project), judul, tahun, deskripsi, stack, tautan Source/Live dengan `aria-label` unik per proyek.
 - `ui/ExperienceItem` — peran, organisasi, periode, ringkasan.
 
 ## Design token (di `src/app/globals.css`, `@theme`)

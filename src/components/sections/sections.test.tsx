@@ -42,7 +42,7 @@ describe("Work", () => {
     render(<Work />);
     const list = screen.getByRole("list");
     expect(within(list).getAllByRole("listitem")).toHaveLength(projects.length);
-    const sources = screen.getAllByRole("link", { name: /source/i });
+    const sources = screen.getAllByRole("link", { name: /^source of /i });
     expect(sources).toHaveLength(projects.filter((p) => p.repo).length);
     for (const link of sources) {
       expect(link).toHaveAttribute("target", "_blank");
@@ -59,6 +59,7 @@ describe("About", () => {
     for (const f of site.focus) expect(screen.getByText(f)).toBeInTheDocument();
     expect(screen.getByText(site.education.degree)).toBeInTheDocument();
     expect(screen.getByText(site.training.label)).toBeInTheDocument();
+    for (const h of site.highlights) expect(screen.getByText(h)).toBeInTheDocument();
     for (const item of experience) {
       expect(screen.getByText(item.summary)).toBeInTheDocument();
     }

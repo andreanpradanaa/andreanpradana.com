@@ -5,5 +5,6 @@ export function cn(...classes: Array<string | false | null | undefined>): string
 
 /** Format rentang tahun, mis. 2023–now (copy situs berbahasa Inggris). */
 export function formatPeriod(start: string, end?: string): string {
+  if (end === start) return start;
   return `${start}–${end ?? "now"}`;
 }

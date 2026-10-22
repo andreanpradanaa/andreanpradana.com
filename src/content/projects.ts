@@ -2,6 +2,8 @@ export type Project = {
   slug: string;
   title: string;
   year: string;
+  /** Konteks singkat yang membedakan proyek: Open source / Used at work / Study project. */
+  context: string;
   summary: string;
   stack: string[];
   repo?: string;
@@ -14,6 +16,7 @@ export const projects: Project[] = [
     slug: "commercehub-api",
     title: "CommerceHub API",
     year: "2026",
+    context: "Open source",
     summary:
       "Backend for a multi-vendor marketplace: layered Go services for catalogue, orders and payments, JWT auth, rate limiting, and a Docker setup that mirrors production.",
     stack: ["Go", "PostgreSQL", "Redis", "Docker"],
@@ -23,6 +26,7 @@ export const projects: Project[] = [
     slug: "distributed-reservation-system",
     title: "Distributed Reservation System",
     year: "2026",
+    context: "Open source",
     summary:
       "A high-concurrency reservation engine. Seat holds are locked in Redis, bookings are idempotent, and confirmation runs asynchronously through RabbitMQ so a slow downstream never blocks the request path.",
     stack: ["Go", "PostgreSQL", "RabbitMQ", "Redis"],
@@ -32,6 +36,7 @@ export const projects: Project[] = [
     slug: "svcgen",
     title: "svcgen",
     year: "2026",
+    context: "Used at work",
     summary:
       "A CLI that scaffolds a production-shaped Go service in one command: fx wiring, Fiber router, optional Postgres, Redis and partner clients, plus Dockerfile, GitLab CI and Sonar config. Used to spin up new integrator services at work.",
     stack: ["Go", "Fiber", "fx", "GitLab CI"],
@@ -41,6 +46,7 @@ export const projects: Project[] = [
     slug: "go-auth-system",
     title: "Go Auth System",
     year: "2026",
+    context: "Study project",
     summary:
       "An authentication playground where every branch is a standalone implementation, from plain sessions to JWT with refresh rotation, OAuth2 and multi-factor. Written to understand the trade-offs, not to ship a library.",
     stack: ["Go", "JWT", "OAuth2"],
@@ -50,6 +56,7 @@ export const projects: Project[] = [
     slug: "sysdesign-lab",
     title: "SysDesign Lab",
     year: "2026",
+    context: "Open source",
     summary:
       "A free, open-source system design course in Indonesian: 42 lessons, 16 mock interviews, quizzes and cheat sheets, all written from primary sources rather than copied from paid material.",
     stack: ["Astro", "MDX", "TypeScript"],
@@ -59,6 +66,7 @@ export const projects: Project[] = [
     slug: "system-design-practice",
     title: "System Design Practice",
     year: "2026",
+    context: "Study project",
     summary:
       "A Go and HTMX app for interview practice: a question bank with answer frameworks, spaced flashcards, a progress tracker and timed mock interviews with self-rating.",
     stack: ["Go", "chi", "HTMX", "PostgreSQL"],

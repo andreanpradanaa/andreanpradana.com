@@ -1,6 +1,6 @@
 # Progress — andreanpradana.com
 
-Diperbarui: 2026-10-22 · Total: 27/27 task (100%)
+Diperbarui: 2026-10-22 · Total: 32/32 task (100%)
 
 | Prioritas | Fitur              | Progress   | %   | x/y | Status      |
 | --------- | ------------------ | ---------- | --- | --- | ----------- |
@@ -60,3 +60,11 @@ Legenda: █ selesai · ░ belum · Status: Belum mulai / Berjalan / Selesai / 
 
 - [ ] Repo GitHub `andreanpradana.com` + import ke Vercel
 - [ ] Domain andreanpradana.com di Vercel (DNS)
+
+## Design critique fixes (P1)
+
+- [x] Target sentuh ≥ 44px (prop `tap`, nav) dan label mono 13px di HP (`text-label`)
+- [x] Nama tautan Source/Live unik per proyek (`aria-label`)
+- [x] Kolom konteks proyek (`context`) dan periode satu tahun
+- [x] Blok Track record di About (`highlights`)
+- [x] Blok Education dirapikan, label aside sebagai `h3`

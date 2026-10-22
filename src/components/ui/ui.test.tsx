@@ -49,6 +49,7 @@ describe("ProjectRow", () => {
             slug: "x",
             title: "X",
             year: "2024",
+            context: "Study project",
             summary: "S",
             stack: ["Go", "Redis"],
             live: "https://x.dev",
@@ -56,10 +57,37 @@ describe("ProjectRow", () => {
         />
       </ol>,
     );
-    expect(screen.getByRole("link", { name: /live/i })).toHaveAttribute("href", "https://x.dev");
+    expect(screen.getByRole("link", { name: "Live demo of X" })).toHaveAttribute(
+      "href",
+      "https://x.dev",
+    );
     expect(screen.queryByRole("link", { name: /source/i })).toBeNull();
     expect(screen.getByText("05")).toBeInTheDocument();
+    expect(screen.getByText("Study project")).toBeInTheDocument();
     expect(screen.getByText("Go · Redis")).toBeInTheDocument();
+  });
+
+  it("tautan Source punya nama unik berisi judul proyek", () => {
+    render(
+      <ol>
+        <ProjectRow
+          index={0}
+          project={{
+            slug: "y",
+            title: "Yard",
+            year: "2025",
+            context: "Open source",
+            summary: "S",
+            stack: ["Go"],
+            repo: "https://github.com/x/y",
+          }}
+        />
+      </ol>,
+    );
+    expect(screen.getByRole("link", { name: "Source of Yard" })).toHaveAttribute(
+      "href",
+      "https://github.com/x/y",
+    );
   });
 });
 

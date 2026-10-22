@@ -7,7 +7,7 @@ type Props = { item: Experience };
 export function ExperienceItem({ item }: Props) {
   return (
     <li className="border-line grid gap-x-8 gap-y-1 border-t py-6 md:grid-cols-12">
-      <p className="tnum text-muted font-mono text-xs md:col-span-3 md:pt-1">
+      <p className="tnum text-muted text-label font-mono md:col-span-3 md:pt-1">
         {formatPeriod(item.start, item.end)}
       </p>
       <div className="md:col-span-9">

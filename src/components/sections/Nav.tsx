@@ -6,7 +6,10 @@ export function Nav() {
     <header>
       <Container>
         <nav aria-label="Primary" className="flex items-baseline justify-between py-6 sm:py-8">
-          <a href="#top" className="font-display text-ink text-lg tracking-tight">
+          <a
+            href="#top"
+            className="font-display text-ink -my-2 inline-block py-2 text-lg tracking-tight"
+          >
             {site.name}
           </a>
           <ul className="flex gap-5 sm:gap-8">
@@ -14,7 +17,7 @@ export function Nav() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="text-muted hover:text-ink font-mono text-xs tracking-wide uppercase transition-colors duration-200"
+                  className="text-muted hover:text-ink text-label -my-3.5 inline-block py-3.5 font-mono tracking-wide uppercase transition-colors duration-200"
                 >
                   {item.label}
                 </a>

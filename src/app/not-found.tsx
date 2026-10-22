@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <main className="flex flex-1 items-center py-24">
       <Container>
-        <p className="text-muted font-mono text-xs tracking-wide uppercase">404</p>
+        <p className="text-muted text-label font-mono tracking-wide uppercase">404</p>
         <h1 className="font-display text-ink mt-4 text-4xl tracking-tight">
           There is nothing at this address.
         </h1>

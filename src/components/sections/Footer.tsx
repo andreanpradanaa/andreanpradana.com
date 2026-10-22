@@ -9,12 +9,15 @@ export function Footer() {
   return (
     <footer className="mt-24 pb-10 sm:mt-32">
       <Container>
-        <div className="border-line text-muted flex flex-col gap-3 border-t pt-6 font-mono text-xs sm:flex-row sm:items-baseline sm:justify-between">
+        <div className="border-line text-muted text-label flex flex-col gap-3 border-t pt-6 font-mono sm:flex-row sm:items-baseline sm:justify-between">
           <p>
             © {year} {site.name}. {site.location.split(",")[0]}.
           </p>
           <p>
-            Set in Newsreader and Geist. <TextLink href={site.sourceUrl}>Source</TextLink>
+            Set in Newsreader and Geist.{" "}
+            <TextLink href={site.sourceUrl} tap>
+              Source
+            </TextLink>
           </p>
         </div>
       </Container>

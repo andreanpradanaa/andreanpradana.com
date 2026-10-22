@@ -15,13 +15,17 @@ export function Contact() {
             If you are building something where the backend has to be right, I would like to hear
             about it.
           </p>
-          <ul className="grid gap-3 font-mono text-sm md:col-span-4 md:col-start-9">
+          <ul className="grid gap-7 font-mono text-sm md:col-span-4 md:col-start-9">
             <li>
-              <TextLink href={`mailto:${site.email}`}>{site.email}</TextLink>
+              <TextLink href={`mailto:${site.email}`} tap>
+                {site.email}
+              </TextLink>
             </li>
             {site.social.map((s) => (
               <li key={s.href}>
-                <TextLink href={s.href}>{s.label}</TextLink>
+                <TextLink href={s.href} tap>
+                  {s.label}
+                </TextLink>
               </li>
             ))}
           </ul>

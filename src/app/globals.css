@@ -71,6 +71,16 @@ body {
   }
 }
 
+/* Label mono kecil: 13px di HP agar terbaca, 12px di layar lebar */
+@utility text-label {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  @media (width >= 40rem) {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+}
+
 /* Angka tabular untuk kolom tahun supaya rapi sejajar */
 .tnum {
   font-variant-numeric: tabular-nums;

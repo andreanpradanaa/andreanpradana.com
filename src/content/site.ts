@@ -25,6 +25,12 @@ export const site = {
     "Concurrency, queues and idempotency",
     "Observability and operability",
   ],
+  /** Bukti angka yang diangkat ke About agar terlihat tanpa scroll ke pengalaman. */
+  highlights: [
+    "42% fewer production incidents in two quarters at Lion Parcel",
+    "Up to 85% faster shipment APIs, 98% cheaper queries",
+    "Test coverage from 0% to 80%+ on RTGS services at BRI",
+  ],
   education: {
     school: "Universitas Sriwijaya",
     degree: "B.Sc. Computer Science, cum laude",
