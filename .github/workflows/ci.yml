@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint && pnpm format:check
+      - name: Build (menghasilkan tipe global untuk typecheck)
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://andreanpradana.com' }}
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Test + coverage (ambang 80%)
+        run: pnpm test:coverage
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 7
+
+  # Deploy: TODO — gunakan integrasi Git Vercel (otomatis per push ke main) atau
+  # tambahkan job dengan `vercel deploy --prod` memakai secret VERCEL_TOKEN,
+  # VERCEL_ORG_ID, VERCEL_PROJECT_ID setelah proyek dibuat di Vercel.

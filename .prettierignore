@@ -1,0 +1,8 @@
+node_modules
+.next
+out
+coverage
+pnpm-lock.yaml
+graphify-out
+.claude
+graphify-out
