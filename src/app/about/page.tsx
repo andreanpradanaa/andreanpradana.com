@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <>
-      <PageHeader number="02" label="About" title="About" />
+      <PageHeader label="About" title="Three years making backends boring, on purpose." />
       <About />
     </>
   );

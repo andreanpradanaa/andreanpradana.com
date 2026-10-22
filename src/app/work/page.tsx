@@ -1,30 +1,29 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/metadata";
-import { ProjectList } from "@/components/sections/ProjectList";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { PageHeader } from "@/components/ui/PageHeader";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Work",
-  description:
-    "Selected backend projects in Go: marketplaces, reservations, auth, tooling and system design study material.",
-  path: "/work",
-});
+/**
+ * Rute lama; mengarahkan ke /projects. Static export tidak mendukung `redirects`,
+ * jadi: meta refresh (React 19 mengangkatnya ke <head>) + aturan 301 di Nginx.
+ */
+export const metadata: Metadata = {
+  title: "Projects",
+  robots: { index: false, follow: true },
+  alternates: { canonical: "/projects" },
+};
 
-export default function WorkPage() {
+export default function WorkRedirect() {
   return (
-    <>
-      <PageHeader
-        number="01"
-        label="Work"
-        title="Selected work"
-        intro="Side projects and tooling, mostly in Go. Each one exists to understand a problem properly, not to pad a list."
-      />
-      <section className="pb-8">
-        <Container>
-          <ProjectList />
-        </Container>
-      </section>
-    </>
+    <section className="py-24">
+      <meta httpEquiv="refresh" content="0;url=/projects" />
+      <Container>
+        <h1 className="text-ink text-lg font-medium">This page moved.</h1>
+        <p className="text-muted mt-2 text-[15px]">
+          <Link href="/projects" className="text-ink underline underline-offset-4">
+            Go to Projects
+          </Link>
+        </p>
+      </Container>
+    </section>
   );
 }

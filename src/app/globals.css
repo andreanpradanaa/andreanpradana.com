@@ -8,6 +8,7 @@
   --muted: #6b655c;
   --line: #d9d3c7;
   --accent: #2f5d3a;
+  --surface: #fdfcfa;
   /* Hijau muda untuk latar pill hero maskot: teks tinta tetap kontras */
   --accent-soft: #9fd3ac;
   /* Tinggi header sticky; dipakai hero beranda agar pas satu layar */
@@ -23,6 +24,7 @@
     --muted: #9c948a;
     --line: #2d2923;
     --accent: #8fbf9a;
+    --surface: #1c1914;
     --accent-soft: #2f5d3a;
   }
 }
@@ -34,9 +36,10 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-surface: var(--surface);
   --color-accent-soft: var(--accent-soft);
 
-  --font-display: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
+  --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
 }
@@ -83,6 +86,9 @@ body {
   .draw {
     stroke-dashoffset: 0;
   }
+  .flow {
+    display: none;
+  }
 }
 
 /* Label mono kecil: 13px di HP agar terbaca, 12px di layar lebar */
@@ -114,6 +120,11 @@ body {
     stroke-dashoffset: 0;
   }
 }
+@keyframes flow {
+  to {
+    stroke-dashoffset: -126;
+  }
+}
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -126,6 +137,10 @@ body {
 @utility draw {
   stroke-dasharray: 1;
   animation: draw 1.1s 0.5s cubic-bezier(0.6, 0, 0.2, 1) both;
+}
+@utility flow {
+  stroke-dasharray: 6 120;
+  animation: flow 3s linear infinite;
 }
 @utility spin-slow {
   animation: spin 28s linear infinite;

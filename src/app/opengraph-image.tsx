@@ -21,7 +21,7 @@ export default function OpenGraphImage() {
         padding: 72,
         background: "#f6f3ec",
         color: "#1a1816",
-        fontFamily: "Georgia, serif",
+        fontFamily: "Helvetica, Arial, sans-serif",
       }}
     >
       <div style={{ display: "flex", fontSize: 24, color: "#6b655c", letterSpacing: 1 }}>

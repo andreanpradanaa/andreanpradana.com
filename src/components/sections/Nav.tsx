@@ -11,7 +11,7 @@ export function Nav() {
         <nav aria-label="Primary" className="flex items-baseline justify-between py-5">
           <Link
             href="/"
-            className="font-display text-ink -my-2 inline-block py-2 text-lg tracking-tight"
+            className="text-ink -my-2 inline-block py-2 text-[15px] font-medium tracking-tight"
           >
             {site.name}
           </Link>

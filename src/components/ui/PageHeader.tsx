@@ -1,26 +1,23 @@
 import { riseDelay } from "@/lib/utils";
 import { Container } from "./Container";
-import { Pill } from "./Pill";
 
-type Props = { number: string; label: string; title: string; intro?: string };
+type Props = { label: string; title: string; intro?: string };
 
-/** Kepala halaman: pill bernomor, h1 display, intro opsional; muncul bertahap. */
-export function PageHeader({ number, label, title, intro }: Props) {
+/** Kepala halaman: eyebrow mono, h1 Geist rapat, intro opsional. */
+export function PageHeader({ label, title, intro }: Props) {
   return (
-    <header className="pt-10 pb-12 sm:pt-14 sm:pb-16">
+    <header className="pt-14 pb-10 sm:pt-20 sm:pb-14">
       <Container>
-        <div className="rise">
-          <Pill number={number}>{label}</Pill>
-        </div>
+        <p className="rise text-label text-muted font-mono tracking-wide uppercase">{label}</p>
         <h1
-          className="rise font-display text-ink mt-6 text-5xl leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl"
+          className="rise text-ink mt-4 text-5xl font-medium tracking-[-0.04em] text-balance sm:text-6xl"
           style={riseDelay(80)}
         >
           {title}
         </h1>
         {intro ? (
           <p
-            className="rise text-ink/85 mt-5 max-w-prose text-lg leading-relaxed"
+            className="rise text-muted mt-5 max-w-[56ch] text-lg leading-relaxed"
             style={riseDelay(160)}
           >
             {intro}

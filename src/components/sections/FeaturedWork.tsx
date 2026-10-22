@@ -5,18 +5,16 @@ import { ProjectList } from "./ProjectList";
 
 const FEATURED_COUNT = 3;
 
-/** Beranda: tiga proyek teratas + tautan ke halaman Work. */
+/** Beranda: tiga proyek teratas + tautan ke halaman Projects. */
 export function FeaturedWork() {
   return (
-    <section aria-labelledby="featured-heading" className="pt-16 pb-8 sm:pt-20">
+    <section aria-labelledby="featured-heading" className="pt-10 pb-8 sm:pt-14">
       <Container>
-        <SectionLabel number="01" id="featured-heading">
-          Selected work
-        </SectionLabel>
+        <SectionLabel id="featured-heading">Selected projects</SectionLabel>
         <ProjectList limit={FEATURED_COUNT} />
-        <p className="border-line border-t pt-6">
-          <TextLink href="/work" tap className="text-label font-mono uppercase">
-            All work
+        <p className="pt-6">
+          <TextLink href="/projects" tap className="text-label font-mono uppercase">
+            All projects
           </TextLink>
         </p>
       </Container>

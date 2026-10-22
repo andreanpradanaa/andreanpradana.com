@@ -1,115 +1,66 @@
+import Link from "next/link";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
-import { Pill } from "@/components/ui/Pill";
-import { RotatingBadge } from "@/components/ui/RotatingBadge";
-import { Swash } from "@/components/ui/Swash";
+import { MetricTile } from "@/components/ui/MetricTile";
+import { SystemDiagram } from "@/components/ui/SystemDiagram";
 import { cn, riseDelay } from "@/lib/utils";
 
-/** Sisipkan kata beraksen (italic + swash) ke dalam baris headline yang memuatnya. */
-function HeadlineLine({ line, emphasis }: { line: string; emphasis: string }) {
-  const at = line.indexOf(emphasis);
-  if (at < 0) return <span className="block">{line} </span>;
-  return (
-    <span className="block">
-      {line.slice(0, at)}
-      <span className="relative inline-block italic">
-        {emphasis}
-        <Swash />
-      </span>
-      {line.slice(at + emphasis.length)}{" "}
-    </span>
-  );
-}
-
-/** Beranda: poster tipografis. Referensi 21st.dev hanya untuk ritme dan elemen kecil. */
+/** Beranda: headline berdampingan dengan diagram layanan hidup, lalu ubin metrik. */
 export function Hero() {
   const h = site.hero;
   return (
-    <section className="pt-10 pb-16 sm:pt-14 sm:pb-20">
+    <section className="pt-12 pb-12 sm:pt-16 sm:pb-16">
       <Container>
-        <div className="rise flex flex-wrap items-center gap-x-6 gap-y-3">
-          <Pill number={h.index}>{h.discipline}</Pill>
-          <span className="text-label text-muted inline-flex items-center gap-2 font-mono tracking-wide uppercase">
-            <span className="bg-accent size-2 rounded-full" aria-hidden="true" />
-            {h.status}
-          </span>
-        </div>
-
-        <div className="mt-10 grid gap-12 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-8">
+        <div className="grid items-center gap-10 md:grid-cols-12 md:gap-8">
+          <div className="md:col-span-6">
+            <p className="rise text-label text-muted flex items-center gap-2.5 font-mono tracking-wide uppercase">
+              <span
+                className="bg-accent size-2 rounded-full shadow-[0_0_12px_var(--accent)]"
+                aria-hidden="true"
+              />
+              {h.status}
+            </p>
             <h1
-              className="rise font-display text-ink text-[2.9rem] leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl xl:text-[5.5rem]"
+              className="rise text-ink mt-6 text-[2.6rem] leading-[1.02] font-medium tracking-[-0.045em] text-balance sm:text-6xl lg:text-[4.25rem]"
               style={riseDelay(80)}
             >
-              {h.headline.map((line) => (
-                <HeadlineLine key={line} line={line} emphasis={h.emphasis} />
+              {h.headline.map((line, i) => (
+                <span key={line} className={cn("block", i === h.mutedLine && "text-muted")}>
+                  {line}{" "}
+                </span>
               ))}
             </h1>
             <p
-              className="rise text-ink/85 mt-8 max-w-[52ch] text-lg leading-relaxed"
+              className="rise text-muted mt-6 max-w-[46ch] text-lg leading-relaxed"
               style={riseDelay(160)}
             >
               {h.intro}
             </p>
-            <div className="rise mt-8 inline-flex items-stretch" style={riseDelay(240)}>
-              <span className="border-ink text-ink bg-paper z-10 rounded-full border px-5 py-3 text-sm font-medium">
-                {h.seekingLabel}
-              </span>
-              <a
-                href="/contact"
-                className="group border-ink bg-accent-soft text-ink hover:bg-ink hover:text-paper -ml-4 inline-flex items-center gap-2 rounded-r-full border py-3 pr-6 pl-8 text-sm font-medium transition-colors duration-200"
+            <div className="rise mt-8 flex flex-wrap gap-3" style={riseDelay(240)}>
+              <Link
+                href={h.primary.href}
+                className="bg-ink text-paper hover:bg-accent hover:text-ink inline-flex items-center rounded-full px-5 py-3 text-sm font-medium transition-colors duration-200"
               >
-                {h.seeking}
-                <span
-                  aria-hidden="true"
-                  className="inline-block transition-transform duration-200 group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </a>
+                {h.primary.label}
+              </Link>
+              <Link
+                href={h.secondary.href}
+                className="border-line text-ink hover:border-ink inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-medium transition-colors duration-200"
+              >
+                {h.secondary.label}
+                <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
-
-          <div className="md:col-span-4 md:flex md:flex-col md:items-end md:justify-between">
-            <ul
-              className="rise flex max-w-xs flex-wrap gap-2 md:justify-end"
-              style={riseDelay(200)}
-            >
-              {h.keywords.map((k, i) => (
-                <li
-                  key={k}
-                  className={cn(
-                    "border-ink/60 text-ink hover:bg-ink hover:text-paper rounded-full border px-3 py-1 font-mono text-xs tracking-wide transition-all duration-200 hover:-translate-y-0.5",
-                    i % 3 === 0 && "rotate-[-3deg]",
-                    i % 3 === 1 && "rotate-[2deg]",
-                    i % 3 === 2 && "rotate-[-1deg]",
-                  )}
-                >
-                  {k}
-                </li>
-              ))}
-            </ul>
-            <RotatingBadge
-              text={h.badgeText}
-              initials={h.initials}
-              className="rise mt-10 md:mt-0"
-            />
+          <div className="rise md:col-span-6" style={riseDelay(200)}>
+            <SystemDiagram />
           </div>
         </div>
-
-        <ul
-          className="rise border-line mt-16 flex flex-wrap gap-x-8 gap-y-3 border-t pt-5 sm:mt-20"
-          style={riseDelay(320)}
-        >
-          {h.services.map((s) => (
-            <li
-              key={s}
-              className="text-ink after:bg-accent relative text-sm font-medium after:absolute after:right-0 after:-bottom-1 after:left-0 after:h-0.5 after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"
-            >
-              {s}
-            </li>
+        <div className="rise mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" style={riseDelay(320)}>
+          {site.metrics.map((m) => (
+            <MetricTile key={m.label} label={m.label} value={m.value} note={m.note} />
           ))}
-        </ul>
+        </div>
       </Container>
     </section>
   );

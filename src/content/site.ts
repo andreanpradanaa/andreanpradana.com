@@ -9,7 +9,7 @@ export const site = {
   currently: { label: "Currently at Icon Plus", href: "https://www.plniconplus.co.id" },
   title: "Andrean Pradana — Backend Engineer",
   description:
-    "Backend engineer in Jakarta with three years across banking, logistics and digital payments, building distributed systems in Go.",
+    "Backend engineer in Jakarta. Three years building and running Go services across banking, logistics and consumer products.",
   headline:
     "Backend engineer building the systems that move money between banks, wallets and billers.",
   intro: [
@@ -35,36 +35,22 @@ export const site = {
     label: "Backend Engineering Program",
     period: "2022",
   },
-  /** Hero beranda (poster tipografis). `emphasis` harus substring dari salah satu baris headline. */
+  /** Hero beranda (konsep Living system). */
   hero: {
-    index: "26/10",
-    discipline: "Backend engineering",
-    status: "Open to backend roles",
-    headline: ["Backend engineer.", "I make money move safely."],
-    emphasis: "money move",
+    status: "Backend engineer · Jakarta",
+    headline: ["Systems that stay up", "when traffic doesn't."],
+    mutedLine: 1,
     intro:
-      "Three years in Go across banking, logistics and digital payments. Interbank settlement at BRI, shipment and payment services at Lion Parcel, payment-gateway integrations at Icon Plus.",
-    seekingLabel: "Open to*",
-    seeking: "Backend roles",
-    keywords: [
-      "Go",
-      "gRPC",
-      "PostgreSQL",
-      "Redis",
-      "RabbitMQ",
-      "Kubernetes",
-      "OpenTelemetry",
-      "Payments",
-    ],
-    badgeText: "Open to backend roles · Jakarta · ",
-    initials: "AP",
-    services: ["Payment systems", "PSP integrations", "Distributed systems", "Observability"],
+      "I design and run backend services in Go: APIs, queues, caches and the observability to know what they are doing. Three years across banking, logistics and consumer products.",
+    primary: { label: "Get in touch", href: "/contact" },
+    secondary: { label: "See projects", href: "/projects" },
   },
-  /** Angka pencapaian untuk halaman About. */
-  stats: [
-    { value: "42%", label: "fewer production incidents in two quarters at Lion Parcel" },
-    { value: "85%", label: "faster shipment APIs, with up to 98% cheaper queries" },
-    { value: "0→80%", label: "automated test coverage on RTGS services at BRI" },
+  /** Ubin metrik ala dashboard (beranda dan About). */
+  metrics: [
+    { label: "Incidents", value: "−42%", note: "two quarters, booking and shipment services" },
+    { label: "API latency", value: "−85%", note: "p95 on critical shipment APIs" },
+    { label: "Query cost", value: "−98%", note: "indexing and refactoring" },
+    { label: "Test coverage", value: "0→80%", note: "RTGS services, from nothing" },
   ],
   email: "andreanpradana2001@gmail.com",
   social: [
@@ -72,7 +58,7 @@ export const site = {
     { label: "LinkedIn", href: "https://www.linkedin.com/in/andreanpradanaa" },
   ],
   nav: [
-    { label: "Work", href: "/work" },
+    { label: "Projects", href: "/projects" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],

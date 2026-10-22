@@ -1,6 +1,6 @@
 # Progress — andreanpradana.com
 
-Diperbarui: 2026-10-22 · Total: 46/46 task (100%)
+Diperbarui: 2026-10-22 · Total: 51/51 task (100%)
 
 | Prioritas | Fitur              | Progress   | %   | x/y | Status      |
 | --------- | ------------------ | ---------- | --- | --- | ----------- |
@@ -91,3 +91,11 @@ Legenda: █ selesai · ░ belum · Status: Belum mulai / Berjalan / Selesai / 
 - [x] About: angka pencapaian (`Stat`) dan timeline pengalaman
 - [x] Contact: email besar, tombol sosial, jam Jakarta (`LocalTime`)
 - [x] Animasi masuk `rise` + hover baris proyek; reduced-motion mematikan animasi
+
+## Living system (P1)
+
+- [x] `SystemDiagram` (SVG, aliran request animasi, reduced-motion) dan `MetricTile`
+- [x] Hero, Projects, About, Contact digaya ulang; Newsreader dan komponen poster dihapus
+- [x] Rute `/projects` baru; `/work` → pengalihan (meta refresh + Nginx 301)
+- [x] Token `--surface` terang/gelap; palet situs dipertahankan
+- [x] Test diperbarui (33), review diterapkan

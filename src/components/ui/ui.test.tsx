@@ -2,10 +2,9 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { ExperienceItem } from "./ExperienceItem";
 import { LocalTime } from "./LocalTime";
+import { MetricTile } from "./MetricTile";
+import { SystemDiagram } from "./SystemDiagram";
 import { PageHeader } from "./PageHeader";
-import { Pill } from "./Pill";
-import { RotatingBadge } from "./RotatingBadge";
-import { Stat } from "./Stat";
 import { ProjectRow } from "./ProjectRow";
 import { SectionLabel } from "./SectionLabel";
 import { TextLink } from "./TextLink";
@@ -67,8 +66,7 @@ describe("ProjectRow", () => {
       "https://x.dev",
     );
     expect(screen.queryByRole("link", { name: /source/i })).toBeNull();
-    expect(screen.getByText("05")).toBeInTheDocument();
-    expect(screen.getByText("Study project")).toBeInTheDocument();
+    expect(screen.getByText(/Study project · 2024/)).toBeInTheDocument();
     expect(screen.getByText("Go · Redis")).toBeInTheDocument();
   });
 
@@ -113,36 +111,9 @@ describe("ExperienceItem", () => {
 
 describe("PageHeader", () => {
   it("merender label, h1, dan intro opsional", () => {
-    render(<PageHeader number="02" label="About" title="About" intro="Intro singkat" />);
+    render(<PageHeader label="About" title="About" intro="Intro singkat" />);
     expect(screen.getByRole("heading", { level: 1, name: "About" })).toBeInTheDocument();
     expect(screen.getByText("Intro singkat")).toBeInTheDocument();
-  });
-});
-
-describe("Pill", () => {
-  it("merender label dan nomor", () => {
-    render(<Pill number="26/10">Backend engineering</Pill>);
-    expect(screen.getByText("26/10")).toBeInTheDocument();
-    expect(screen.getByText("Backend engineering")).toBeInTheDocument();
-  });
-});
-
-describe("Stat", () => {
-  it("merender nilai besar dan keterangan", () => {
-    render(<Stat value="42%" label="fewer incidents" />);
-    expect(screen.getByText("42%")).toBeInTheDocument();
-    expect(screen.getByText("fewer incidents")).toBeInTheDocument();
-  });
-});
-
-describe("RotatingBadge", () => {
-  it("menyembunyikan teks melingkar dari pembaca layar dan menampilkan inisial", () => {
-    render(<RotatingBadge text="Open to backend roles · Jakarta ·" initials="AP" />);
-    expect(screen.getByText("AP")).toBeInTheDocument();
-    expect(screen.getByText("Open to backend roles · Jakarta ·").closest("svg")).toHaveAttribute(
-      "aria-hidden",
-      "true",
-    );
   });
 });
 
@@ -153,5 +124,24 @@ describe("LocalTime", () => {
     render(<LocalTime timeZone="Asia/Jakarta" label="Jakarta" />);
     expect(screen.getByText(/23:30/)).toBeInTheDocument();
     vi.useRealTimers();
+  });
+});
+
+describe("MetricTile", () => {
+  it("merender label, nilai, dan catatan", () => {
+    render(<MetricTile label="Incidents" value="−42%" note="2 quarters" />);
+    expect(screen.getByText("Incidents")).toBeInTheDocument();
+    expect(screen.getByText("−42%")).toBeInTheDocument();
+    expect(screen.getByText("2 quarters")).toBeInTheDocument();
+  });
+});
+
+describe("SystemDiagram", () => {
+  it("dekoratif: aria-hidden dan memuat node layanan", () => {
+    render(<SystemDiagram />);
+    const svg = screen.getByTestId("system-diagram");
+    expect(svg).toHaveAttribute("aria-hidden", "true");
+    expect(svg).toHaveTextContent(/api/i);
+    expect(svg).toHaveTextContent(/postgres/i);
   });
 });

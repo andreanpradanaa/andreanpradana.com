@@ -4,7 +4,7 @@ import { getSiteUrl } from "@/lib/site-url";
 /** Wajib untuk `output: "export"`: rute metadata dirender statis saat build. */
 export const dynamic = "force-static";
 
-const ROUTES = ["/", "/work", "/about", "/contact"] as const;
+const ROUTES = ["/", "/projects", "/about", "/contact"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();

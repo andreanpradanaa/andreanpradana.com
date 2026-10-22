@@ -6,43 +6,61 @@ import { site } from "@/content/site";
 import AboutPage from "./about/page";
 import ContactPage from "./contact/page";
 import HomePage from "./page";
-import WorkPage from "./work/page";
+import ProjectsPage from "./projects/page";
+import WorkRedirect from "./work/page";
 
 vi.mock("next/navigation", () => ({ usePathname: () => "/" }));
 
 describe("HomePage", () => {
-  it("memuat hero: satu h1 dengan headline, badge kata kunci, services, CTA ke contact", () => {
+  it("memuat hero dengan diagram dekoratif, ubin metrik, tiga proyek unggulan, dan CTA", () => {
     render(<HomePage />);
     const h1 = screen.getAllByRole("heading", { level: 1 });
     expect(h1).toHaveLength(1);
     expect(h1[0]).toHaveTextContent(site.hero.headline.join(" "));
-    for (const k of site.hero.keywords) expect(screen.getByText(k)).toBeInTheDocument();
-    for (const s of site.hero.services) expect(screen.getByText(s)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /backend roles/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /get in touch/i })).toHaveAttribute("href", "/contact");
+    expect(screen.getByRole("link", { name: /see projects/i })).toHaveAttribute(
       "href",
-      "/contact",
+      "/projects",
     );
-    expect(screen.getByRole("heading", { level: 2, name: /selected work/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /all work/i })).toHaveAttribute("href", "/work");
+    for (const m of site.metrics) expect(screen.getByText(m.value)).toBeInTheDocument();
+    expect(screen.getByTestId("system-diagram")).toHaveAttribute("aria-hidden", "true");
+    expect(
+      screen.getByRole("heading", { level: 2, name: /selected projects/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /all projects/i })).toHaveAttribute(
+      "href",
+      "/projects",
+    );
   });
 });
 
-describe("WorkPage", () => {
+describe("ProjectsPage", () => {
   it("punya h1 dan semua proyek", () => {
-    render(<WorkPage />);
-    expect(screen.getByRole("heading", { level: 1, name: /selected work/i })).toBeInTheDocument();
+    render(<ProjectsPage />);
+    expect(
+      screen.getByRole("heading", { level: 1, name: /built to understand/i }),
+    ).toBeInTheDocument();
     expect(within(screen.getByRole("list")).getAllByRole("listitem")).toHaveLength(projects.length);
+  });
+});
+
+describe("WorkRedirect", () => {
+  it("mengarahkan ke /projects", () => {
+    render(<WorkRedirect />);
+    expect(screen.getByRole("link", { name: /projects/i })).toHaveAttribute("href", "/projects");
+    const meta = document.head.querySelector('meta[http-equiv="refresh"]');
+    expect(meta).toHaveAttribute("content", "0;url=/projects");
   });
 });
 
 describe("AboutPage", () => {
   it("punya h1, bio, angka pencapaian, dan timeline pengalaman", () => {
     render(<AboutPage />);
-    expect(screen.getByRole("heading", { level: 1, name: /about/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: /three years/i })).toBeInTheDocument();
     expect(screen.getByText(site.about[0])).toBeInTheDocument();
-    for (const st of site.stats) {
-      expect(screen.getByText(st.value)).toBeInTheDocument();
-      expect(screen.getByText(st.label)).toBeInTheDocument();
+    for (const m of site.metrics) {
+      expect(screen.getByText(m.value)).toBeInTheDocument();
+      expect(screen.getByText(m.label)).toBeInTheDocument();
     }
     const timeline = screen.getByRole("list", { name: /experience/i });
     expect(within(timeline).getAllByRole("listitem")).toHaveLength(experience.length);
@@ -54,7 +72,7 @@ describe("ContactPage", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-10-22T03:05:00Z")); // 10:05 WIB
     render(<ContactPage />);
-    expect(screen.getByRole("heading", { level: 1, name: /contact/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: /let's talk/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: site.email })).toHaveAttribute(
       "href",
       `mailto:${site.email}`,

@@ -22,9 +22,9 @@ describe("Nav", () => {
   });
 
   it("menandai tautan aktif dengan aria-current sesuai pathname", () => {
-    pathname.value = "/work";
+    pathname.value = "/projects";
     render(<Nav />);
     const active = screen.getByRole("link", { current: "page" });
-    expect(active).toHaveTextContent("Work");
+    expect(active).toHaveTextContent("Projects");
   });
 });

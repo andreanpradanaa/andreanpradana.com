@@ -8,7 +8,7 @@ Situs personal branding Andrean Pradana, Backend Engineer (Go, sistem pembayaran
 
 ## Keputusan desain (anti "terlihat buatan AI")
 
-- **Tipografi sebagai elemen utama**: display serif (Newsreader, italic untuk aksen) + sans (Geist) + mono (Geist Mono) untuk label kecil/metadata.
+- **Konsep "Living system"** (dipilih 2026-10-23): identitas backend engineer lewat diagram layanan yang hidup dan ubin metrik; tipografi Geist (headline) + Geist Mono (label).
 - **Palet sempit**: kertas hangat (`--paper`), tinta (`--ink`), abu-abu teks sekunder (`--muted`), satu aksen (`--accent`, hijau tua) dipakai hemat. Mode gelap hangat (bukan hitam pekat).
 - **Tidak dipakai**: gradient ungu/biru, glassmorphism, partikel, emoji di headline, skill bar persen, kartu 3 kolom dengan ikon, teks gradient, bayangan besar, badge "Available for work" berkedip.
 - **Layout**: kiri-rata, grid asimetris, hairline `1px` sebagai pemisah, label bernomor (`01 — Work`), whitespace besar, lebar konten maksimum ±72rem dengan kolom teks ±40rem.

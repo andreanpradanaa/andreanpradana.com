@@ -7,7 +7,7 @@ describe("sitemap & robots", () => {
     const entries = sitemap();
     expect(entries.map((e) => e.url.replace(/^https?:\/\/[^/]+/, ""))).toEqual([
       "/",
-      "/work",
+      "/projects",
       "/about",
       "/contact",
     ]);

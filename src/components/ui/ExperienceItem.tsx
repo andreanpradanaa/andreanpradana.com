@@ -22,7 +22,7 @@ export function ExperienceItem({ item, isLast }: Props) {
             className="bg-line absolute top-4 bottom-0 left-0 w-px -translate-x-1/2"
           />
         )}
-        <h3 className="font-display text-ink text-2xl leading-tight sm:text-3xl">
+        <h3 className="text-ink text-xl font-medium tracking-tight sm:text-2xl">
           {item.href ? <TextLink href={item.href}>{item.org}</TextLink> : item.org}
         </h3>
         <p className="text-muted mt-1 text-[15px]">{item.role}</p>

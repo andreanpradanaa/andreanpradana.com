@@ -14,7 +14,7 @@ export function Footer() {
             © {year} {site.name}. {site.location.split(",")[0]}.
           </p>
           <p>
-            Set in Newsreader and Geist.{" "}
+            Set in Geist.{" "}
             <TextLink href={site.sourceUrl} tap>
               Source
             </TextLink>
