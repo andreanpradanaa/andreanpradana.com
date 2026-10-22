@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
-import { MetricTile } from "@/components/ui/MetricTile";
 import { SystemDiagram } from "@/components/ui/SystemDiagram";
 import { cn, riseDelay } from "@/lib/utils";
 
@@ -55,11 +54,6 @@ export function Hero() {
           <div className="rise md:col-span-6" style={riseDelay(200)}>
             <SystemDiagram />
           </div>
-        </div>
-        <div className="rise mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" style={riseDelay(320)}>
-          {site.metrics.map((m) => (
-            <MetricTile key={m.label} label={m.label} value={m.value} note={m.note} />
-          ))}
         </div>
       </Container>
     </section>

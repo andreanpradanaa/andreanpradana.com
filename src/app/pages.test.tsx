@@ -12,7 +12,7 @@ import WorkRedirect from "./work/page";
 vi.mock("next/navigation", () => ({ usePathname: () => "/" }));
 
 describe("HomePage", () => {
-  it("memuat hero dengan diagram dekoratif, ubin metrik, tiga proyek unggulan, dan CTA", () => {
+  it("memuat hero dengan diagram dekoratif, tiga proyek unggulan, dan CTA", () => {
     render(<HomePage />);
     const h1 = screen.getAllByRole("heading", { level: 1 });
     expect(h1).toHaveLength(1);
@@ -22,7 +22,6 @@ describe("HomePage", () => {
       "href",
       "/projects",
     );
-    for (const m of site.metrics) expect(screen.getByText(m.value)).toBeInTheDocument();
     expect(screen.getByTestId("system-diagram")).toHaveAttribute("aria-hidden", "true");
     expect(
       screen.getByRole("heading", { level: 2, name: /selected projects/i }),
@@ -54,14 +53,10 @@ describe("WorkRedirect", () => {
 });
 
 describe("AboutPage", () => {
-  it("punya h1, bio, angka pencapaian, dan timeline pengalaman", () => {
+  it("punya h1, bio, dan timeline pengalaman", () => {
     render(<AboutPage />);
     expect(screen.getByRole("heading", { level: 1, name: /three years/i })).toBeInTheDocument();
     expect(screen.getByText(site.about[0])).toBeInTheDocument();
-    for (const m of site.metrics) {
-      expect(screen.getByText(m.value)).toBeInTheDocument();
-      expect(screen.getByText(m.label)).toBeInTheDocument();
-    }
     const timeline = screen.getByRole("list", { name: /experience/i });
     expect(within(timeline).getAllByRole("listitem")).toHaveLength(experience.length);
   });

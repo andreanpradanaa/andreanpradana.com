@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { ExperienceItem } from "./ExperienceItem";
 import { LocalTime } from "./LocalTime";
-import { MetricTile } from "./MetricTile";
 import { SystemDiagram } from "./SystemDiagram";
 import { PageHeader } from "./PageHeader";
 import { ProjectRow } from "./ProjectRow";
@@ -124,15 +123,6 @@ describe("LocalTime", () => {
     render(<LocalTime timeZone="Asia/Jakarta" label="Jakarta" />);
     expect(screen.getByText(/23:30/)).toBeInTheDocument();
     vi.useRealTimers();
-  });
-});
-
-describe("MetricTile", () => {
-  it("merender label, nilai, dan catatan", () => {
-    render(<MetricTile label="Incidents" value="−42%" note="2 quarters" />);
-    expect(screen.getByText("Incidents")).toBeInTheDocument();
-    expect(screen.getByText("−42%")).toBeInTheDocument();
-    expect(screen.getByText("2 quarters")).toBeInTheDocument();
   });
 });
 

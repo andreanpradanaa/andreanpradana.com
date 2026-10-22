@@ -2,7 +2,6 @@ import { experience } from "@/content/experience";
 import { site } from "@/content/site";
 import { Container } from "@/components/ui/Container";
 import { ExperienceItem } from "@/components/ui/ExperienceItem";
-import { MetricTile } from "@/components/ui/MetricTile";
 import { cn, riseDelay } from "@/lib/utils";
 
 function AsideLabel({ children, className }: { children: string; className?: string }) {
@@ -57,13 +56,6 @@ export function About() {
               </div>
             </div>
           </div>
-        </div>
-
-        <AsideLabel className="rise mt-20">Track record</AsideLabel>
-        <div className="rise mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" style={riseDelay(80)}>
-          {site.metrics.map((m) => (
-            <MetricTile key={m.label} label={m.label} value={m.value} note={m.note} />
-          ))}
         </div>
 
         <AsideLabel className="rise mt-20">Experience</AsideLabel>

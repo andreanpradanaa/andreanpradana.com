@@ -45,13 +45,6 @@ export const site = {
     primary: { label: "Get in touch", href: "/contact" },
     secondary: { label: "See projects", href: "/projects" },
   },
-  /** Ubin metrik ala dashboard (beranda dan About). */
-  metrics: [
-    { label: "Incidents", value: "−42%", note: "two quarters, booking and shipment services" },
-    { label: "API latency", value: "−85%", note: "p95 on critical shipment APIs" },
-    { label: "Query cost", value: "−98%", note: "indexing and refactoring" },
-    { label: "Test coverage", value: "0→80%", note: "RTGS services, from nothing" },
-  ],
   email: "andreanpradana2001@gmail.com",
   social: [
     { label: "GitHub", href: "https://github.com/andreanpradanaa" },

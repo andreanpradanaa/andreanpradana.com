@@ -94,7 +94,7 @@ Legenda: █ selesai · ░ belum · Status: Belum mulai / Berjalan / Selesai / 
 
 ## Living system (P1)
 
-- [x] `SystemDiagram` (SVG, aliran request animasi, reduced-motion) dan `MetricTile`
+- [x] `SystemDiagram` (SVG, aliran request animasi, reduced-motion); ubin metrik dihapus 2026-10-23
 - [x] Hero, Projects, About, Contact digaya ulang; Newsreader dan komponen poster dihapus
 - [x] Rute `/projects` baru; `/work` → pengalihan (meta refresh + Nginx 301)
 - [x] Token `--surface` terang/gelap; palet situs dipertahankan
