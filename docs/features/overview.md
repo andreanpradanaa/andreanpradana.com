@@ -12,7 +12,7 @@ Situs personal branding Andrean Pradana, Backend Engineer (Go, sistem pembayaran
 - **Palet sempit**: kertas hangat (`--paper`), tinta (`--ink`), abu-abu teks sekunder (`--muted`), satu aksen (`--accent`, hijau tua) dipakai hemat. Mode gelap hangat (bukan hitam pekat).
 - **Tidak dipakai**: gradient ungu/biru, glassmorphism, partikel, emoji di headline, skill bar persen, kartu 3 kolom dengan ikon, teks gradient, bayangan besar, badge "Available for work" berkedip.
 - **Layout**: kiri-rata, grid asimetris, hairline `1px` sebagai pemisah, label bernomor (`01 — Work`), whitespace besar, lebar konten maksimum ±72rem dengan kolom teks ±40rem.
-- **Gerak**: hanya transisi warna/underline ≤ 200ms; tidak ada animasi scroll. Pengecualian atas permintaan user (2026-10-22): hero beranda memakai poster maskot 21st.dev yang interaktif (kepala mengikuti pointer, kedip, gelembung sapaan); hormat `prefers-reduced-motion`.
+- **Gerak**: animasi masuk `rise` (0,6s, bertahap per blok), swash `draw`, stempel `spin-slow`, transisi hover ≤ 300ms; tidak ada animasi scroll; `prefers-reduced-motion` mematikan semuanya.
 - **Bahasa copy situs**: Inggris (jangkauan recruiter lebih luas); dokumen repo Indonesia. Bisa diganti dari `src/content/` tanpa menyentuh komponen.
 
 ## Peta halaman & navigasi

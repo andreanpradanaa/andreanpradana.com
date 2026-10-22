@@ -1,6 +1,6 @@
 # Progress — andreanpradana.com
 
-Diperbarui: 2026-10-22 · Total: 41/41 task (100%)
+Diperbarui: 2026-10-22 · Total: 46/46 task (100%)
 
 | Prioritas | Fitur              | Progress   | %   | x/y | Status      |
 | --------- | ------------------ | ---------- | --- | --- | ----------- |
@@ -83,3 +83,11 @@ Legenda: █ selesai · ░ belum · Status: Belum mulai / Berjalan / Selesai / 
 - [x] Font Archivo Black, token `--accent-soft` dan `--nav-h`
 - [x] Perbaikan review: kontras mode gelap, `role="list"`, lint React Compiler
 - [x] Test perilaku beranda (h1, services, klik maskot) dan mock jsdom
+
+## Poster redesign (P1)
+
+- [x] Referensi 21st.dev dicatat di spec; komponen vendor dan Archivo Black dihapus
+- [x] Hero tipografis: pill, headline + swash, CTA, badge kata kunci, stempel berputar, services
+- [x] About: angka pencapaian (`Stat`) dan timeline pengalaman
+- [x] Contact: email besar, tombol sosial, jam Jakarta (`LocalTime`)
+- [x] Animasi masuk `rise` + hover baris proyek; reduced-motion mematikan animasi

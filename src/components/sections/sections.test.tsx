@@ -34,7 +34,6 @@ describe("About", () => {
     for (const f of site.focus) expect(screen.getByText(f)).toBeInTheDocument();
     expect(screen.getByText(site.education.degree)).toBeInTheDocument();
     expect(screen.getByText(site.training.label)).toBeInTheDocument();
-    for (const h of site.highlights) expect(screen.getByText(h)).toBeInTheDocument();
     for (const item of experience) {
       expect(screen.getByText(item.summary)).toBeInTheDocument();
     }

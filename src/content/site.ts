@@ -25,12 +25,6 @@ export const site = {
     "Concurrency, queues and idempotency",
     "Observability and operability",
   ],
-  /** Bukti angka yang diangkat ke About agar terlihat tanpa scroll ke pengalaman. */
-  highlights: [
-    "42% fewer production incidents in two quarters at Lion Parcel",
-    "Up to 85% faster shipment APIs, 98% cheaper queries",
-    "Test coverage from 0% to 80%+ on RTGS services at BRI",
-  ],
   education: {
     school: "Universitas Sriwijaya",
     degree: "B.Sc. Computer Science, cum laude",
@@ -41,31 +35,37 @@ export const site = {
     label: "Backend Engineering Program",
     period: "2022",
   },
-  /** Isi poster hero maskot di beranda (komponen 21st.dev). */
+  /** Hero beranda (poster tipografis). `emphasis` harus substring dari salah satu baris headline. */
   hero: {
     index: "26/10",
     discipline: "Backend engineering",
-    tagline: "Make it reliable",
-    collection: ["Selected", "Works"] as [string, string],
-    reel: ["Go · Payments @ 2026", "Backend engineer"] as [string, string],
-    year: "2026",
-    initials: "AP",
-    badge: "Hire me",
-    line2: "Backend",
-    line3: "Engineer",
-    word: "Go",
-    verticalTag: "Payments",
-    bracketed: "!",
+    status: "Open to backend roles",
+    headline: ["Backend engineer.", "I make money move safely."],
+    emphasis: "money move",
+    intro:
+      "Three years in Go across banking, logistics and digital payments. Interbank settlement at BRI, shipment and payment services at Lion Parcel, payment-gateway integrations at Icon Plus.",
     seekingLabel: "Open to*",
     seeking: "Backend roles",
-    services: ["Payment systems", "PSP integrations", "Distributed systems", "Observability"],
-    greetings: [
-      "Hi, I'm Andrean.",
-      "I build payment backends in Go.",
-      "Idempotency keys save lives.",
-      "Okay, that's enough poking :)",
+    keywords: [
+      "Go",
+      "gRPC",
+      "PostgreSQL",
+      "Redis",
+      "RabbitMQ",
+      "Kubernetes",
+      "OpenTelemetry",
+      "Payments",
     ],
+    badgeText: "Open to backend roles · Jakarta · ",
+    initials: "AP",
+    services: ["Payment systems", "PSP integrations", "Distributed systems", "Observability"],
   },
+  /** Angka pencapaian untuk halaman About. */
+  stats: [
+    { value: "42%", label: "fewer production incidents in two quarters at Lion Parcel" },
+    { value: "85%", label: "faster shipment APIs, with up to 98% cheaper queries" },
+    { value: "0→80%", label: "automated test coverage on RTGS services at BRI" },
+  ],
   email: "andreanpradana2001@gmail.com",
   social: [
     { label: "GitHub", href: "https://github.com/andreanpradanaa" },

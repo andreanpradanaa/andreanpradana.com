@@ -1,7 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { ExperienceItem } from "./ExperienceItem";
+import { LocalTime } from "./LocalTime";
 import { PageHeader } from "./PageHeader";
+import { Pill } from "./Pill";
+import { RotatingBadge } from "./RotatingBadge";
+import { Stat } from "./Stat";
 import { ProjectRow } from "./ProjectRow";
 import { SectionLabel } from "./SectionLabel";
 import { TextLink } from "./TextLink";
@@ -112,5 +116,42 @@ describe("PageHeader", () => {
     render(<PageHeader number="02" label="About" title="About" intro="Intro singkat" />);
     expect(screen.getByRole("heading", { level: 1, name: "About" })).toBeInTheDocument();
     expect(screen.getByText("Intro singkat")).toBeInTheDocument();
+  });
+});
+
+describe("Pill", () => {
+  it("merender label dan nomor", () => {
+    render(<Pill number="26/10">Backend engineering</Pill>);
+    expect(screen.getByText("26/10")).toBeInTheDocument();
+    expect(screen.getByText("Backend engineering")).toBeInTheDocument();
+  });
+});
+
+describe("Stat", () => {
+  it("merender nilai besar dan keterangan", () => {
+    render(<Stat value="42%" label="fewer incidents" />);
+    expect(screen.getByText("42%")).toBeInTheDocument();
+    expect(screen.getByText("fewer incidents")).toBeInTheDocument();
+  });
+});
+
+describe("RotatingBadge", () => {
+  it("menyembunyikan teks melingkar dari pembaca layar dan menampilkan inisial", () => {
+    render(<RotatingBadge text="Open to backend roles · Jakarta ·" initials="AP" />);
+    expect(screen.getByText("AP")).toBeInTheDocument();
+    expect(screen.getByText("Open to backend roles · Jakarta ·").closest("svg")).toHaveAttribute(
+      "aria-hidden",
+      "true",
+    );
+  });
+});
+
+describe("LocalTime", () => {
+  it("menampilkan jam di zona waktu yang diminta", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-10-22T16:30:00Z")); // 23:30 WIB
+    render(<LocalTime timeZone="Asia/Jakarta" label="Jakarta" />);
+    expect(screen.getByText(/23:30/)).toBeInTheDocument();
+    vi.useRealTimers();
   });
 });

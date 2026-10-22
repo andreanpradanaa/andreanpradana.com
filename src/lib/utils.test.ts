@@ -1,9 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { cn, formatPeriod } from "./utils";
+import { cn, formatPeriod, riseDelay } from "./utils";
 
 describe("cn", () => {
   it("menggabungkan class dan membuang nilai falsy", () => {
     expect(cn("a", false, "b", undefined, null, "c")).toBe("a b c");
+  });
+});
+
+describe("riseDelay", () => {
+  it("mengembalikan custom property delay dalam ms", () => {
+    expect(riseDelay(80)).toEqual({ "--rise-delay": "80ms" });
   });
 });
 

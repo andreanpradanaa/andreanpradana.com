@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { experience } from "@/content/experience";
 import { projects } from "@/content/projects";
@@ -11,30 +11,19 @@ import WorkPage from "./work/page";
 vi.mock("next/navigation", () => ({ usePathname: () => "/" }));
 
 describe("HomePage", () => {
-  it("memuat hero maskot dengan satu h1, services, tiga proyek unggulan, dan tautan ke semua proyek", () => {
+  it("memuat hero: satu h1 dengan headline, badge kata kunci, services, CTA ke contact", () => {
     render(<HomePage />);
     const h1 = screen.getAllByRole("heading", { level: 1 });
     expect(h1).toHaveLength(1);
-    expect(h1[0]).toHaveAccessibleName(
-      `${site.hero.year} ${site.hero.initials} ${site.hero.line2} ${site.hero.line3} ${site.hero.word}${site.hero.bracketed}`,
-    );
+    expect(h1[0]).toHaveTextContent(site.hero.headline.join(" "));
+    for (const k of site.hero.keywords) expect(screen.getByText(k)).toBeInTheDocument();
     for (const s of site.hero.services) expect(screen.getByText(s)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: site.hero.seeking })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /backend roles/i })).toHaveAttribute(
       "href",
       "/contact",
     );
     expect(screen.getByRole("heading", { level: 2, name: /selected work/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /all work/i })).toHaveAttribute("href", "/work");
-    expect(screen.queryByText(experience[0].summary)).toBeNull();
-  });
-
-  it("klik maskot menampilkan sapaan berikutnya", () => {
-    render(<HomePage />);
-    const mascot = screen.getByRole("button", { name: /say hi/i });
-    expect(screen.getByText(site.hero.greetings[0])).toBeInTheDocument();
-    fireEvent.click(mascot); // klik pertama: sapaan pertama tampil
-    fireEvent.click(mascot); // klik kedua: sapaan berikutnya
-    expect(screen.getByText(site.hero.greetings[1])).toBeInTheDocument();
   });
 });
 
@@ -47,21 +36,34 @@ describe("WorkPage", () => {
 });
 
 describe("AboutPage", () => {
-  it("punya h1, bio, dan daftar pengalaman", () => {
+  it("punya h1, bio, angka pencapaian, dan timeline pengalaman", () => {
     render(<AboutPage />);
     expect(screen.getByRole("heading", { level: 1, name: /about/i })).toBeInTheDocument();
     expect(screen.getByText(site.about[0])).toBeInTheDocument();
-    for (const item of experience) expect(screen.getByText(item.summary)).toBeInTheDocument();
+    for (const st of site.stats) {
+      expect(screen.getByText(st.value)).toBeInTheDocument();
+      expect(screen.getByText(st.label)).toBeInTheDocument();
+    }
+    const timeline = screen.getByRole("list", { name: /experience/i });
+    expect(within(timeline).getAllByRole("listitem")).toHaveLength(experience.length);
   });
 });
 
 describe("ContactPage", () => {
-  it("punya h1 dan tautan email", () => {
+  it("punya h1, email besar, tombol sosial, dan jam Jakarta", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-10-22T03:05:00Z")); // 10:05 WIB
     render(<ContactPage />);
     expect(screen.getByRole("heading", { level: 1, name: /contact/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: site.email })).toHaveAttribute(
       "href",
       `mailto:${site.email}`,
     );
+    for (const so of site.social) {
+      expect(screen.getByRole("link", { name: so.label })).toHaveAttribute("href", so.href);
+    }
+    expect(screen.getByText(/10:05/)).toBeInTheDocument();
+    expect(screen.getByText(/jakarta/i)).toBeInTheDocument();
+    vi.useRealTimers();
   });
 });
